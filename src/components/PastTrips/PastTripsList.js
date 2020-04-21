@@ -6,8 +6,6 @@ import addTrip from './addTrip.svg';
 const PastTripsList = () => {
   const [tripList] = useState(trips);
 
-  console.log(tripList);
-
   return (
     <div>
       {/* This linked to create trip from  */}
