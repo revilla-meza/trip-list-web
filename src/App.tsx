@@ -1,10 +1,10 @@
 import React from 'react';
-import './App.css';
+import PastTripList from './components/PastTrips/PastTripsList'
 
 function App() {
   return (
     <div>
-      {/* render PastTrips here*/}
+      <PastTripList/>
     </div>
   );
 }
