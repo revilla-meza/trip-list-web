@@ -9,7 +9,7 @@
     "created_at": "2016-09-05"
   },
   {
-    "id": 1,
+    "id": 2,
     "name": "Christmas",
     "travel_method": 0,
     "flight_number": null,
@@ -18,7 +18,7 @@
     "created_at": "2017-06-01"
   },
   {
-    "id": 1,
+    "id": 3,
     "name": "Ski trip!",
     "travel_method": 0,
     "flight_number": null,
@@ -27,7 +27,7 @@
     "created_at": "2017-12-15"
   },
   {
-    "id": 1,
+    "id": 4,
     "name": "Finde en Chicago",
     "travel_method": 0,
     "flight_number": null,
