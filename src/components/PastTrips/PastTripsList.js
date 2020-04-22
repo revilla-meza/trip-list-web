@@ -3,9 +3,6 @@ import trips from './trips.json';
 import PastTripsCard from './PastTripsCard';
 import addTrip from './addTrip.svg';
 
-
-
-
 const PastTripsList = () => {
   const [tripList] = useState(trips);
 
