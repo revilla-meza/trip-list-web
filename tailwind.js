@@ -238,7 +238,7 @@ module.exports = {
         '"Segoe UI Symbol"',
         '"Noto Color Emoji"',
       ],
-      serif: ['Georgia', 'Cambria', '"Times New Roman"', 'Times', 'serif'],
+      serif: ['Georgia', 'Cambria', '"Times New Roman"', 'Times', 'serif','Quicksand'],
       mono: ['Menlo', 'Monaco', 'Consolas', '"Liberation Mono"', '"Courier New"', 'monospace'],
     },
     fontSize: {
