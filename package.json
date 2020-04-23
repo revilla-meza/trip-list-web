@@ -26,7 +26,8 @@
     "eject": "react-scripts eject",
     "build:css": "postcss src/assets/tailwind.css -o src/assets/main.css",
     "watch:css": "postcss src/assets/tailwind.css -o src/assets/main.css",
-    "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix"
+    "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
+    "deploy": "aws s3 cp build/ s3://gottapackup.com --recursive --profile triplist"
   },
   "eslintConfig": {
     "extends": "react-app"
