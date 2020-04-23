@@ -3681,7 +3681,7 @@ video {
 }
 
 .font-serif {
-  font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+  font-family: Georgia, Cambria, "Times New Roman", Times, serif, Quicksand;
 }
 
 .font-mono {
@@ -13987,7 +13987,7 @@ video {
   }
 
   .sm\:font-serif {
-    font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+    font-family: Georgia, Cambria, "Times New Roman", Times, serif, Quicksand;
   }
 
   .sm\:font-mono {
@@ -24294,7 +24294,7 @@ video {
   }
 
   .md\:font-serif {
-    font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+    font-family: Georgia, Cambria, "Times New Roman", Times, serif, Quicksand;
   }
 
   .md\:font-mono {
@@ -34601,7 +34601,7 @@ video {
   }
 
   .lg\:font-serif {
-    font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+    font-family: Georgia, Cambria, "Times New Roman", Times, serif, Quicksand;
   }
 
   .lg\:font-mono {
@@ -44908,7 +44908,7 @@ video {
   }
 
   .xl\:font-serif {
-    font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+    font-family: Georgia, Cambria, "Times New Roman", Times, serif, Quicksand;
   }
 
   .xl\:font-mono {
