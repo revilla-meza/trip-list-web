@@ -1,5 +1,5 @@
 import React from 'react';
-import arrowBack from './arrow_back.svg';
+import arrowBack from './arrowBack.svg';
 import { Link } from 'react-router-dom';
 
 const AddTrip = () => {
