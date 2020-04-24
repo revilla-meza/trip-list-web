@@ -1,5 +1,5 @@
 import React from 'react';
-import arrow_back from './arrow_back.svg';
+import arrowBack from './arrow_back.svg';
 import { Link } from 'react-router-dom';
 
 const AddTrip = () => {
@@ -7,7 +7,7 @@ const AddTrip = () => {
   return (
     <div>
       <Link to="/past" className="">
-        <img src={arrow_back} />
+        <img src={arrowBack} />
       </Link>
       <h1 className="mt-4 mb-16 ml-8 font-sans text-lg font-bold ">Create your Trip</h1>
       <form className="px-6 my-2 ">
