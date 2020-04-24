@@ -1,8 +1,6 @@
 import React from 'react';
 
-
-
-const PastTripsCard = ({ trips }) => {
+const PastTripsCard = ({ trips }: any) => {
   return (
     <div className="px-6 my-2 ">
       <div className="flex flex-col bg-indigo-200 rounded p-1 shadow-lg">
