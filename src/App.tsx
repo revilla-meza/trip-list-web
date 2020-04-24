@@ -2,7 +2,7 @@ import React from 'react';
 import PastTripList from './components/PastTrips/PastTripsList';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import TripPage from './components/Trips/TripPage';
-import AddTrip from './components/AddTrip';
+import AddTrip from './components/CreateTrip/AddTrip';
 
 function App() {
   return (
