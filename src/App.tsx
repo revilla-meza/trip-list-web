@@ -3,16 +3,22 @@ import PastTripList from './components/PastTrips/PastTripsList';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import TripPage from './components/Trips/TripPage';
 import AddTrip from './components/CreateTrip/AddTrip';
+import NavBar from './components/NavBar/NavBar'
 
 function App() {
   return (
     <div>
       <Switch>
         <Redirect exact from="/" to="past" />
-        <Route exact path="/past" component={PastTripList} />
-        <Route path="/trip/:id" component={TripPage} />
-        <Route path="/add" component={AddTrip} />
+        {/* <Route exact path="/past" component={PastTripList}/> */}
+        <Route path="/past" render={() => { return (<div><PastTripList/><NavBar/></div>) }} />
+        <Route path="/trip/:id" render={() => { return (<div><TripPage/><NavBar/></div>) }} />
+        {/* <Route  component={TripPage} /> */}
+        <Route exact path="/add" component={AddTrip} />
+        
       </Switch>
+      
+      
     </div>
   );
 }
