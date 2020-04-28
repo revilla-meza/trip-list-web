@@ -10,15 +10,10 @@ function App() {
     <div>
       <Switch>
         <Redirect exact from="/" to="past" />
-        {/* <Route exact path="/past" component={PastTripList}/> */}
         <Route path="/past" render={() => { return (<div><PastTripList/><NavBar/></div>) }} />
         <Route path="/trip/:id" render={() => { return (<div><TripPage/><NavBar/></div>) }} />
-        {/* <Route  component={TripPage} /> */}
-        <Route exact path="/add" component={AddTrip} />
-        
-      </Switch>
-      
-      
+        <Route exact path="/add" component={AddTrip} />  
+      </Switch>   
     </div>
   );
 }
