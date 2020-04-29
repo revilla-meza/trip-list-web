@@ -34,11 +34,11 @@ const NavBar = () => {
 
 export default NavBar;
 
-//Nav Bar Buttons 
-const NavBarButton = ({ iconSrc, label, path }) => {
+//Nav Bar Buttons
+const NavBarButton = ({ iconSrc, label, path }: any) => {
   return (
     <Link to={path} className="flex flex-col mt-2 justify-end">
-      <img src={iconSrc} alt='nav-bar button' />
+      <img src={iconSrc} alt="nav-bar button" />
       <span>{label}</span>
     </Link>
   );
