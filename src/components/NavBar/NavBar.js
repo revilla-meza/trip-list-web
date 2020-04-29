@@ -26,7 +26,7 @@ const NavBar = () => {
   return (
     <div className="flex flex-row justify-around border-gray-500 border-t inset-x-0 bottom-0 absolute fixed h-16 text-center">
       {navBarButtons.map(({ iconSrc, label, path }) => (
-        <NavBarButton iconSrc={iconSrc} label={label} path={path} />
+        <NavBarButton iconSrc={iconSrc} label={label} path={path} key={path} />
       ))}
     </div>
   );
@@ -38,7 +38,7 @@ export default NavBar;
 const NavBarButton = ({ iconSrc, label, path }) => {
   return (
     <Link to={path} className="flex flex-col mt-2">
-      <img src={iconSrc} />
+      <img src={iconSrc} alt='nav-bar button' />
       <span>{label}</span>
     </Link>
   );
