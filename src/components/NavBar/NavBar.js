@@ -37,7 +37,7 @@ export default NavBar;
 //Nav Bar Buttons 
 const NavBarButton = ({ iconSrc, label, path }) => {
   return (
-    <Link to={path} className="flex flex-col mt-2">
+    <Link to={path} className="flex flex-col mt-2 justify-end">
       <img src={iconSrc} alt='nav-bar button' />
       <span>{label}</span>
     </Link>
