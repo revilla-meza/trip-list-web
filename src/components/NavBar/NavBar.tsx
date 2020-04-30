@@ -1,32 +1,35 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import add from './add.svg';
-import past from './past.svg';
+import PastIcon from './PastIcon';
+import AddIcon from './AddIcon';
+import ItemsIcon from './ItemsIcon';
+
 import items from './items.svg';
 
 const NavBar = () => {
   const navBarButtons = [
     {
       path: '/past',
-      iconSrc: past,
+      icon: <PastIcon />,
       label: 'my trips',
     },
     {
       path: '/add',
-      iconSrc: add,
+      icon: <AddIcon />,
       label: 'add trip',
     },
     {
       path: '/items',
-      iconSrc: items,
+      icon: <ItemsIcon />,
       label: 'my items',
     },
   ];
 
   return (
     <div className="flex flex-row justify-around border-gray-500 border-t inset-x-0 bottom-0 absolute fixed h-16 text-center">
-      {navBarButtons.map(({ iconSrc, label, path }) => (
-        <NavBarButton iconSrc={iconSrc} label={label} path={path} key={path} />
+      {navBarButtons.map(({ icon, label, path }) => (
+        <NavBarButton icon={icon} label={label} path={path} key={path} />
       ))}
     </div>
   );
@@ -35,10 +38,10 @@ const NavBar = () => {
 export default NavBar;
 
 //Nav Bar Buttons
-const NavBarButton = ({ iconSrc, label, path }: any) => {
+const NavBarButton = ({ icon, label, path }: any) => {
   return (
-    <Link to={path} className="flex flex-col mt-2 justify-end">
-      <img src={iconSrc} alt="nav-bar button" />
+    <Link to={path} className="flex flex-col mt-2 justify-end items-center">
+      {icon}
       <span>{label}</span>
     </Link>
   );
