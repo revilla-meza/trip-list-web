@@ -1,11 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import add from './add.svg';
 import PastIcon from './PastIcon';
 import AddIcon from './AddIcon';
 import ItemsIcon from './ItemsIcon';
-
-import items from './items.svg';
 
 const NavBar = () => {
   const navBarButtons = [
