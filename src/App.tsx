@@ -1,15 +1,16 @@
 import React from 'react';
-import PastTripList from './routes/PastTrips/PastTripsList';
+import PastTripList from './routes/PastTrips';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import TripPage from './routes/Trips/TripPage';
-import AddTrip from './routes/CreateTrip/AddTrip';
-import NavBar from './components/NavBar/NavBar';
+import TripPage from './routes/Trips/';
+import AddTrip from './routes/AddTrip/';
+import NavBar from './components/NavBar';
+import UserForm from './routes/UserForm';
 
 function App() {
   return (
     <div>
       <Switch>
-        <Redirect exact from="/" to="past" />
+        <Redirect exact from="/" to="/user" />
         <Route
           path="/past"
           render={() => {
@@ -33,6 +34,7 @@ function App() {
           }}
         />
         <Route exact path="/add" component={AddTrip} />
+        <Route exact path="/user" component={UserForm} />
       </Switch>
     </div>
   );

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import SVGIcon from '../SVGIcon';
+import SVGIcon from './SVGIcon';
 
 const NavBar = () => {
   const navBarButtons = [
