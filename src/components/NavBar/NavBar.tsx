@@ -1,24 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import PastIcon from './PastIcon';
-import AddIcon from './AddIcon';
-import ItemsIcon from './ItemsIcon';
+import SVGIcon from '../SVGIcon';
 
 const NavBar = () => {
   const navBarButtons = [
     {
       path: '/past',
-      icon: <PastIcon />,
+      icon: <SVGIcon icon="PastIcon" />,
       label: 'my trips',
     },
     {
       path: '/add',
-      icon: <AddIcon />,
+      icon: <SVGIcon icon="AddIcon" />,
       label: 'add trip',
     },
     {
       path: '/items',
-      icon: <ItemsIcon />,
+      icon: <SVGIcon icon="ItemsIcon" />,
       label: 'my items',
     },
   ];

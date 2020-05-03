@@ -1,8 +1,8 @@
 import React from 'react';
-import PastTripList from './components/PastTrips/PastTripsList';
+import PastTripList from './routes/PastTrips/PastTripsList';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import TripPage from './components/Trips/TripPage';
-import AddTrip from './components/CreateTrip/AddTrip';
+import TripPage from './routes/Trips/TripPage';
+import AddTrip from './routes/CreateTrip/AddTrip';
 import NavBar from './components/NavBar/NavBar';
 
 function App() {

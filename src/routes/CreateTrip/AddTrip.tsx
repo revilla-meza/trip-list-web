@@ -1,13 +1,13 @@
 import React from 'react';
-import arrowBack from './arrowBack.svg';
 import { Link } from 'react-router-dom';
+import SVGIcon from '../../components/SVGIcon';
 
 const AddTrip = () => {
   // ADD TRIP FORM
   return (
     <div>
       <Link to="/past" className="">
-        <img src={arrowBack} alt="arrow back" />
+        <SVGIcon icon="ArrowBack" />
       </Link>
       <h1 className="mt-4 mb-16 ml-8 font-sans text-lg font-bold ">Create your Trip</h1>
       <form className="px-6 my-2 ">
