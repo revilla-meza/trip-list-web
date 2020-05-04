@@ -10,16 +10,15 @@ interface UserFormProps {
 const UserForm = ({ registerUser, status }: UserFormProps) => {
   console.log(status);
 
-  const textInputRef:any = React.useRef(null);
+  const textInputRef: any = React.useRef(null);
 
-  const onSubmit = (event:any) => {
+  const onSubmit = (event: any) => {
     event.preventDefault();
 
-    if(textInputRef.current){
+    if (textInputRef.current) {
       registerUser(textInputRef.current.value);
     }
-    
-  }
+  };
   return (
     <div>
       <h1 className="mt-8 text-center mb-8 font-sans text-xl font-bold">Welcome to Trip List</h1>
@@ -42,7 +41,7 @@ const UserForm = ({ registerUser, status }: UserFormProps) => {
   );
 };
 
-const mapStateToProps = (state:any) => ({
+const mapStateToProps = (state: any) => ({
   status: state.user.status,
 });
 

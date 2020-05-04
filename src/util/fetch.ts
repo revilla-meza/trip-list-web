@@ -1,4 +1,4 @@
-type supportedHttpMethods = "GET" | "PATCH" | "DELETE" | "POST";
+type supportedHttpMethods = 'GET' | 'PATCH' | 'DELETE' | 'POST';
 
 interface RequestOptions {
   method: supportedHttpMethods;
@@ -8,14 +8,14 @@ interface RequestOptions {
   extraHeaders?: any;
   userId?: number;
   body: any;
-} 
+}
 
-async function httpRequest({url, apiDomain, path, userId, body, extraHeaders, method}: RequestOptions) {
+async function httpRequest({ url, apiDomain, path, userId, body, extraHeaders, method }: RequestOptions) {
   if (userId) {
-    extraHeaders = extraHeaders ? {...extraHeaders, userId } : { userId };
+    extraHeaders = extraHeaders ? { ...extraHeaders, userId } : { userId };
   }
-  
-  const address = url || apiDomain + path; 
+
+  const address = url || apiDomain + path;
 
   // Default options are marked with *
   const response = await fetch(address, {
@@ -23,7 +23,7 @@ async function httpRequest({url, apiDomain, path, userId, body, extraHeaders, me
     mode: 'cors', // no-cors, *cors, same-origin
     headers: {
       'Content-Type': 'application/json',
-      'userId': userId,
+      userId: userId,
       // 'Content-Type': 'application/x-www-form-urlencoded',
     },
     body: JSON.stringify(body),

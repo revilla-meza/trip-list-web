@@ -16,22 +16,21 @@ interface ComponentStateProps {
 type AppState = ComponentStateProps;
 
 function App({ user }: AppState) {
-  React.useEffect(()=>{
+  React.useEffect(() => {
     const { email, userId } = user;
 
     if (email) {
       const userJson = JSON.stringify({ email, userId });
-      window.localStorage.setItem("user", userJson);
+      window.localStorage.setItem('user', userJson);
     }
-  }, [user])
+  }, [user]);
 
   return (
     <div>
       <Switch>
-
         <Redirect exact from="/" to="/user" />
-        {user.status === status.loggedIn && (<Redirect exact from="/user" to="past" />)}
-        
+        {user.status === status.loggedIn && <Redirect exact from="/user" to="past" />}
+
         <PrivateRoute isLoggedIn component={PastTripList} path="/past" />
         <PrivateRoute component={TripPage} path="/trip/:id" />
         <PrivateRoute component={AddTrip} path="/add" />
@@ -39,11 +38,10 @@ function App({ user }: AppState) {
       </Switch>
     </div>
   );
-};
+}
 
-const mapStateToProps = (state:any) => ({
+const mapStateToProps = (state: any) => ({
   user: state.user,
 });
-
 
 export default connect<AppState, any, any>(mapStateToProps, null)(App);
