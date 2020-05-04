@@ -17,6 +17,7 @@ const UserForm = ({ registerUser, status }: UserFormProps) => {
 
     if (textInputRef.current) {
       registerUser(textInputRef.current.value);
+      textInputRef.current.value = "";
     }
   };
   return (

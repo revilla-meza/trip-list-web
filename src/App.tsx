@@ -3,7 +3,6 @@ import PastTripList from './routes/PastTrips';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import TripPage from './routes/Trips/';
 import AddTrip from './routes/AddTrip/';
-import NavBar from './components/NavBar';
 import UserForm from './routes/UserForm';
 import { connect } from 'react-redux';
 import { userStatus as status } from './reducers/userReducer';
