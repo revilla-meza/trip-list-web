@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import trips from './trips.json';
 import PastTripsCard from './PastTripsCard';
+import NavBar from '../../components/NavBar';
+
 import { Link } from 'react-router-dom';
 
 const PastTripsList = () => {
@@ -14,6 +16,7 @@ const PastTripsList = () => {
           <PastTripsCard key={trip.id} trips={trip} />
         </Link>
       ))}
+      <NavBar />
     </div>
   );
 };
