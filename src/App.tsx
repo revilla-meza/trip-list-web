@@ -5,39 +5,45 @@ import TripPage from './routes/Trips/';
 import AddTrip from './routes/AddTrip/';
 import NavBar from './components/NavBar';
 import UserForm from './routes/UserForm';
+import { connect } from 'react-redux';
+import { userStatus as status } from './reducers/userReducer';
+import PrivateRoute from './components/PrivateRoute';
 
-function App() {
+interface ComponentStateProps {
+  user: any;
+}
+
+type AppState = ComponentStateProps;
+
+function App({ user }: AppState) {
+  React.useEffect(()=>{
+    const { email, userId } = user;
+
+    if (email) {
+      const userJson = JSON.stringify({ email, userId });
+      window.localStorage.setItem("user", userJson);
+    }
+  }, [user])
+
   return (
     <div>
       <Switch>
+
         <Redirect exact from="/" to="/user" />
-        <Route
-          path="/past"
-          render={() => {
-            return (
-              <div>
-                <PastTripList />
-                <NavBar />
-              </div>
-            );
-          }}
-        />
-        <Route
-          path="/trip/:id"
-          render={() => {
-            return (
-              <div>
-                <TripPage />
-                <NavBar />
-              </div>
-            );
-          }}
-        />
-        <Route exact path="/add" component={AddTrip} />
+        {user.status === status.loggedIn && (<Redirect exact from="/user" to="past" />)}
+        
+        <PrivateRoute isLoggedIn component={PastTripList} path="/past" />
+        <PrivateRoute component={TripPage} path="/trip/:id" />
+        <PrivateRoute component={AddTrip} path="/add" />
         <Route exact path="/user" component={UserForm} />
       </Switch>
     </div>
   );
-}
+};
 
-export default App;
+const mapStateToProps = (state:any) => ({
+  user: state.user,
+});
+
+
+export default connect<AppState, any, any>(mapStateToProps, null)(App);
