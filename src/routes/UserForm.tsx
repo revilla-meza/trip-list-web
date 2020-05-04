@@ -8,8 +8,6 @@ interface UserFormProps {
 }
 
 const UserForm = ({ registerUser, status }: UserFormProps) => {
-  console.log(status);
-
   const textInputRef: any = React.useRef(null);
 
   const onSubmit = (event: any) => {
@@ -17,7 +15,7 @@ const UserForm = ({ registerUser, status }: UserFormProps) => {
 
     if (textInputRef.current) {
       registerUser(textInputRef.current.value);
-      textInputRef.current.value = "";
+      textInputRef.current.value = '';
     }
   };
   return (
