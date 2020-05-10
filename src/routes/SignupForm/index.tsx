@@ -19,7 +19,7 @@ const SignupForm = ({ registerUser, status }: SignupFormProps) => {
       textInputRef.current.value = '';
     }
   };
-  if (status === "loggedIn") {
+  if (status === 'loggedIn') {
     return <Redirect to="/past" />;
   }
   return (
@@ -40,7 +40,9 @@ const SignupForm = ({ registerUser, status }: SignupFormProps) => {
           Sign up
         </button>
         <div className="mt-4 text-center">
-          <Link to="/login" className="no-underline text-blue-500 text-md">I already have an account</Link>
+          <Link to="/login" className="no-underline text-blue-500 text-md">
+            I already have an account
+          </Link>
         </div>
       </form>
     </div>

@@ -1,4 +1,3 @@
-
 import { CREATE_USER_START, CREATE_USER_SUCCESS, CREATE_USER_ERROR } from '../actions/createUser';
 import { GET_USER_START, GET_USER_SUCCESS, GET_USER_ERROR } from '../actions/getUserByEmail';
 
@@ -9,8 +8,13 @@ export enum userStatus {
   error = 'error',
 }
 
-export type userActions = 'CREATE_USER_START' | 'CREATE_USER_SUCCESS' | 'CREATE_USER_ERROR' |
-  'GET_USER_START' | 'GET_USER_SUCCESS' | 'GET_USER_ERROR';
+export type userActions =
+  | 'CREATE_USER_START'
+  | 'CREATE_USER_SUCCESS'
+  | 'CREATE_USER_ERROR'
+  | 'GET_USER_START'
+  | 'GET_USER_SUCCESS'
+  | 'GET_USER_ERROR';
 
 export interface UserState {
   userId?: number;

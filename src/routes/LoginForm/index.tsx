@@ -20,7 +20,7 @@ const LoginForm = ({ loginWithoutPassword, status }: LoginFormProps) => {
     }
   };
 
-  if (status === "loggedIn") {
+  if (status === 'loggedIn') {
     return <Redirect to="/past" />;
   }
 
@@ -42,7 +42,9 @@ const LoginForm = ({ loginWithoutPassword, status }: LoginFormProps) => {
           Sign in
         </button>
         <div className="mt-4 text-center">
-          <Link to="/signup" className="no-underline text-blue-500 text-md">I don't have an account</Link>
+          <Link to="/signup" className="no-underline text-blue-500 text-md">
+            I don&apos;t have an account
+          </Link>
         </div>
       </form>
     </div>
