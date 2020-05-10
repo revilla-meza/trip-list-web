@@ -3,7 +3,8 @@ import PastTripList from './routes/PastTrips';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import TripPage from './routes/Trips/';
 import AddTrip from './routes/AddTrip/';
-import UserForm from './routes/UserForm';
+import SignupForm from './routes/SignupForm';
+import LoginForm from './routes/LoginForm';
 import { connect } from 'react-redux';
 import { userStatus as status } from './reducers/userReducer';
 import PrivateRoute from './components/PrivateRoute';
@@ -27,13 +28,12 @@ function App({ user }: AppState) {
   return (
     <div>
       <Switch>
-        <Redirect exact from="/" to="/user" />
-        {user.status === status.loggedIn && <Redirect exact from="/user" to="past" />}
-
-        <PrivateRoute isLoggedIn component={PastTripList} path="/past" />
+        <Redirect exact from="/" to="/signup" />
+        <PrivateRoute component={PastTripList} path="/past" />
         <PrivateRoute component={TripPage} path="/trip/:id" />
         <PrivateRoute component={AddTrip} path="/add" />
-        <Route exact path="/user" component={UserForm} />
+        <Route exact path="/signup" component={SignupForm} />
+        <Route exact path="/login" component={LoginForm} />
       </Switch>
     </div>
   );

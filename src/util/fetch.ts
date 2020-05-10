@@ -7,7 +7,7 @@ interface RequestOptions {
   url?: string;
   extraHeaders?: any;
   userId?: number;
-  body: any;
+  body?: any;
 }
 
 async function httpRequest({ url, apiDomain, path, userId, body, extraHeaders, method }: RequestOptions) {
@@ -24,12 +24,21 @@ async function httpRequest({ url, apiDomain, path, userId, body, extraHeaders, m
     headers: {
       'Content-Type': 'application/json',
       userId: userId,
+      ...extraHeaders
       // 'Content-Type': 'application/x-www-form-urlencoded',
     },
     body: JSON.stringify(body),
-    ...extraHeaders,
   });
-  return await response.json(); // parses JSON response into native JavaScript objects
+  const success = handleErrors(response);
+
+  return await success.json(); // parses JSON response into native JavaScript objects
+}
+
+function handleErrors(response:Response) {
+  if (!response.ok) {
+      throw Error(response.statusText);
+  }
+  return response;
 }
 
 export default httpRequest;
