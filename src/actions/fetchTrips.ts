@@ -1,5 +1,7 @@
 import request from '../util/fetch';
-import { FETCH_TRIPS_START, FETCH_TRIPS_SUCCESS, FETCH_TRIPS_ERROR } from '../reducers/tripReducer';
+export const FETCH_TRIPS_START = 'FETCH_TRIPS_START';
+export const FETCH_TRIPS_SUCCESS = 'FETCH_TRIPS_SUCCESS';
+export const FETCH_TRIPS_ERROR = 'FETCH_TRIPS_ERROR';
 
 const fetchTrips = () => async (dispatch: any, getState: any) => {
   const { userId } = getState().user;

@@ -43,8 +43,8 @@ const PastTripsList = ({ trips, fetchTrips, status }: AppState) => {
 };
 
 const mapStateToProps = (state: any) => ({
-  trips: state.trip.trips,
-  status: state.trip.status,
+  trips: state.trips.trips,
+  status: state.trips.getTripsStatus,
 });
 
 export default connect(mapStateToProps, { fetchTrips })(PastTripsList);

@@ -1,40 +1,32 @@
-export const FETCH_TRIPS_START = 'FETCH_TRIPS_START';
-export const FETCH_TRIPS_SUCCESS = 'FETCH_TRIPS_SUCCESS';
-export const FETCH_TRIPS_ERROR = 'FETCH_TRIPS_ERROR';
+import { requestStatus } from '../types/index';
+import { FETCH_TRIPS_START, FETCH_TRIPS_SUCCESS, FETCH_TRIPS_ERROR } from '../actions/fetchTrips';
+export type tripsActions = 'FETCH_TRIPS_START' | 'FETCH_TRIPS_SUCCESS' | 'FETCH_TRIPS_ERROR';
 
-export type tripActions = 'FETCH_TRIPS_START' | 'FETCH_TRIPS_SUCCESS' | 'FETCH_TRIPS_ERROR';
-
-export interface TripState {
+export interface TripsState {
   trips?: any;
-  status: tripStatus;
+  getTripsStatus: requestStatus;
 }
 
-export enum tripStatus {
-  loading = 'loading',
-  succsess = 'success',
-  error = 'error',
-}
-
-interface TripAction {
-  type: tripActions;
+interface TripsAction {
+  type: tripsActions;
   payload?: any;
 }
 const initialState = {
   trips: [],
-  status: tripStatus.loading,
+  getTripsStatus: requestStatus.loading,
 };
 
-const tripReducer = (state = initialState, action: TripAction): TripState => {
+const tripsReducer = (state = initialState, action: TripsAction): TripsState => {
   switch (action.type) {
     case FETCH_TRIPS_START:
-      return { ...state, status: tripStatus.loading };
+      return { ...state, getTripsStatus: requestStatus.loading };
     case FETCH_TRIPS_SUCCESS:
-      return { trips: action.payload, status: tripStatus.succsess };
+      return { trips: action.payload, getTripsStatus: requestStatus.succsess };
     case FETCH_TRIPS_ERROR:
-      return { ...state, status: tripStatus.error };
+      return { ...state, getTripsStatus: requestStatus.error };
     default:
       return state;
   }
 };
 
-export default tripReducer;
+export default tripsReducer;
