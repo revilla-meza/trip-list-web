@@ -6,7 +6,6 @@ import AddTrip from './routes/AddTrip/';
 import SignupForm from './routes/SignupForm';
 import LoginForm from './routes/LoginForm';
 import { connect } from 'react-redux';
-import { userStatus as status } from './reducers/userReducer';
 import PrivateRoute from './components/PrivateRoute';
 
 interface ComponentStateProps {
