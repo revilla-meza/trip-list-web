@@ -22,7 +22,7 @@ const createTripReducer = (state = initialState, action: createTripAction): Crea
     case CREATE_TRIP_START:
       return { ...state, getCreateTripStatus: requestStatus.loading };
     case CREATE_TRIP_SUCCESS:
-      return { newTrip: action.payload, getCreateTripStatus: requestStatus.succsess };
+      return { newTrip: action.payload, getCreateTripStatus: requestStatus.success };
     case CREATE_TRIP_ERROR:
       return { ...state, getCreateTripStatus: requestStatus.error };
     default:

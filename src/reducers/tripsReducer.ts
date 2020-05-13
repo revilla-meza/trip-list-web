@@ -21,7 +21,7 @@ const tripsReducer = (state = initialState, action: TripsAction): TripsState => 
     case FETCH_TRIPS_START:
       return { ...state, getTripsStatus: requestStatus.loading };
     case FETCH_TRIPS_SUCCESS:
-      return { trips: action.payload, getTripsStatus: requestStatus.succsess };
+      return { trips: action.payload, getTripsStatus: requestStatus.success };
     case FETCH_TRIPS_ERROR:
       return { ...state, getTripsStatus: requestStatus.error };
     default:

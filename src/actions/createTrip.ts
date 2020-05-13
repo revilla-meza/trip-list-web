@@ -7,8 +7,6 @@ export const CREATE_TRIP_ERROR = 'CREATE_TRIP_ERROR';
 const createTrip = (newTrip: any) => async (dispatch: any, getState: any) => {
   const body = newTrip;
   const { userId } = getState().user;
-  console.log(userId);
-  console.log(body);
   dispatch({ type: 'CREATE_TRIP_START' });
   try {
     const addTrip = await request({
