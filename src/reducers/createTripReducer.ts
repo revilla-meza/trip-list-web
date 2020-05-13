@@ -1,5 +1,5 @@
 import { requestStatus } from '../types/index';
-import { CREATE_TRIP_START, CREATE_TRIP_SUCCESS, CREATE_TRIP_ERROR}  from '../actions/createTrip';
+import { CREATE_TRIP_START, CREATE_TRIP_SUCCESS, CREATE_TRIP_ERROR } from '../actions/createTrip';
 export type createTripActions = 'CREATE_TRIP_START' | 'CREATE_TRIP_SUCCESS' | 'CREATE_TRIP_ERROR';
 
 export interface CreateTripState {

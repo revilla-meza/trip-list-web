@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import createTripReducer from './createTripReducer'
+import createTripReducer from './createTripReducer';
 import userReducer from './userReducer';
 import tripsReducer from './tripsReducer';
 
