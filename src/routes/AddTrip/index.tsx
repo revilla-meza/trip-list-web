@@ -12,7 +12,9 @@ interface ComponentStateProps {
 type AppState = ComponentStateProps;
 
 const AddTrip = ({ createTrip, status }: AppState) => {
+  /* eslint-disable */
   const [newTrip, setNewTrip] = useState({ destination: '', title: '', travel_method: '' });
+  /* eslint-enable */
 
   const onChangeHandler = (e: any) => {
     setNewTrip({ ...newTrip, [e.target.name]: e.target.value });
