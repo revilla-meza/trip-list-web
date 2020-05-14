@@ -1,5 +1,5 @@
 export enum requestStatus {
   loading = 'loading',
-  succsess = 'success',
+  success = 'success',
   error = 'error',
 }
