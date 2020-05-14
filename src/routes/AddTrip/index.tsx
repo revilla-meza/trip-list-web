@@ -16,6 +16,8 @@ const AddTrip = ({ createTrip, status }: AppState) => {
   const [newTrip, setNewTrip] = useState({ destination: '', title: '', travel_method: '' });
   /* eslint-enable */
 
+  const travelMethods: any = ['select a travel method', 'airplane', 'car', 'train', 'other'];
+
   const onChangeHandler = (e: any) => {
     setNewTrip({ ...newTrip, [e.target.name]: e.target.value });
   };
@@ -62,11 +64,10 @@ const AddTrip = ({ createTrip, status }: AppState) => {
             onChange={onChangeHandler}
             name="travel_method"
           >
-            <option>Select your travel method</option>
-            <option>airplane</option>
-            <option>car</option>
-            <option>train</option>
-            <option>other</option>
+            {travelMethods.map((method: any, key: any) => (
+              // eslint-disable-next-line react/jsx-key
+              <option key={key}>{method}</option>
+            ))}
           </select>
           <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
             <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">

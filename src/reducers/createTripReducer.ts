@@ -13,7 +13,7 @@ interface createTripAction {
   payload?: any;
 }
 const initialState = {
-  newTrip: [],
+  newTrip: {},
   getCreateTripStatus: requestStatus.loading,
 };
 
