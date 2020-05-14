@@ -64,10 +64,7 @@ const AddTrip = ({ createTrip, status }: AppState) => {
             onChange={onChangeHandler}
             name="travel_method"
           >
-            {travelMethods.map((method: any, key: any) => (
-              // eslint-disable-next-line react/jsx-key
-              <option key={key}>{method}</option>
-            ))}
+            {travelMethods.map((method: any, key: any) => <option key={key}>{method}</option>)}
           </select>
           <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
             <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
