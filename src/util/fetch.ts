@@ -24,21 +24,19 @@ async function httpRequest({ url, apiDomain, path, userId, body, extraHeaders, m
 
   const address = url || apiDomain + path;
 
-  // Default options are marked with *
   const response = await fetch(address, {
-    method: method, // *GET, POST, PUT, DELETE, etc.
-    mode: 'cors', // no-cors, *cors, same-origin
+    method: method,
+    mode: 'cors',
     headers: {
       'Content-Type': 'application/json',
       userId: userId,
       ...extraHeaders,
-      // 'Content-Type': 'application/x-www-form-urlencoded',
     },
     body: JSON.stringify(body),
   });
   const success = handleErrors(response);
 
-  return await success.json(); // parses JSON response into native JavaScript objects
+  return await success.json();
 }
 
 export default httpRequest;
