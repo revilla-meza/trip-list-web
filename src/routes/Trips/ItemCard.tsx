@@ -1,17 +1,12 @@
-import React from 'react'
+import React from 'react';
 
-const ItemCard = () => {
-    return (
-        <div className='flex'>
-
-            <div>
-                icon
-            </div>
-            <div className='border-b-2 border-gray-600'>
-                    Shampoo
-            </div>
-        </div>
-    )
-}
+const ItemCard = ({ item }: any) => {
+  return (
+    <div className="flex">
+      <div className='w-8'>icon</div>
+      <div className="border-b-2 border-gray-200 w-11/12">{item.label}</div>
+    </div>
+  );
+};
 
 export default ItemCard;
