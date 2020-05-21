@@ -2,7 +2,7 @@ import React from 'react';
 
 const Checked = () => {
   return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width="20" height="20" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         d="M8.00004 1.33333C4.32404 1.33333 1.33337 4.324 1.33337 8C1.33337 11.676 4.32404 14.6667 8.00004 14.6667C11.676 14.6667 14.6667 11.676 14.6667 8C14.6667 4.324 11.676 1.33333 8.00004 1.33333ZM6.66737 10.942L4.19204 8.472L5.13337 7.528L6.66604 9.05799L10.1954 5.52866L11.138 6.47133L6.66737 10.942Z"
         fill="black"
