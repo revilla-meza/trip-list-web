@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
+import SVGIcon from '../../components/SVGIcon';
 
 const ItemCard = ({ item }: any) => {
+  const [toggle, setToggle] = useState(true);
+
+  const onClickHandler = () => {
+    toggle ? setToggle(false) : setToggle(true);
+  };
   return (
-    <div className="flex">
-      <div className='w-8'>icon</div>
-      <div className="border-b-2 border-gray-200 w-11/12">{item.label}</div>
+    <div className="flex items-center h-8">
+      <div onClick={onClickHandler} className="w-8 ml-2">
+        {toggle ? <SVGIcon icon="NoCheck" /> : <SVGIcon icon="Checked" />}
+      </div>
+      <div className="border-b-2 border-gray-200 w-full">{item.label}</div>
     </div>
   );
 };

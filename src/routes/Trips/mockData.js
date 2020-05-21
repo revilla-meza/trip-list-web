@@ -12,5 +12,12 @@ export default [
     label: 'Carpa',
     image: null,
     quantity: null,
-  }
+  },
+  {
+    id: 6,
+    description: null,
+    label: 'Linterna',
+    image: null,
+    quantity: null,
+  },
 ];
