@@ -8,10 +8,10 @@ const ItemCard = ({ item }: any) => {
   const onClickHandler = () => {
     if (isChecked) {
       toggleChecked(false);
-      setTextCheck('text-gray-500');
+      setTextCheck('text-gray-800');
     } else {
       toggleChecked(true);
-      setTextCheck('text-gray-800');
+      setTextCheck('text-gray-500');
     }
   };
   return (
