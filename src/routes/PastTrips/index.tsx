@@ -17,7 +17,7 @@ const PastTripsList = ({ trips, fetchTrips, status }: AppState) => {
   useEffect(() => {
     fetchTrips();
   }, [fetchTrips]);
-
+  console.log(trips);
   if (status === 'loading') {
     return <p className="mt-32  font-sans text-lg font-bold text-center  ">loading...</p>;
   }
