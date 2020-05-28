@@ -8,7 +8,7 @@ const reducers = combineReducers({
   user: userReducer,
   trips: tripsReducer,
   createTrip: createTripReducer,
-  list: listByIdReducer,
+  lists: listByIdReducer,
 });
 
 export default reducers;

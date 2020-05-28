@@ -7,29 +7,31 @@ import { useParams } from 'react-router-dom';
 import AddItemForm from '../../components/AddItemForm';
 
 interface ComponentStateProps {
-  list: any;
+  listsById: any;
   status: any;
   fetchList: any;
   tripsById: any;
 }
 type AppState = ComponentStateProps;
 
-const Items = ({ list, status, fetchList, tripsById }: AppState) => {
+const Items = ({ listsById, status, fetchList, tripsById }: AppState) => {
   const { id }: any = useParams();
   const currentTrip = tripsById[id];
 
   useEffect(() => {
-    fetchList(currentTrip.listId);
+    if (!listsById[currentTrip.listId]) {
+      fetchList(currentTrip.listId);
+    }
   }, [id]);
   if (status === 'loading') {
     return <p className="mt-32  font-sans text-lg font-bold text-center  ">loading...</p>;
   }
   return (
     <div>
-      <div className="bg-indigo-200 text-center mt-16 text-xl">{list.title}</div>
-      {list && (
+      <div className="bg-indigo-200 text-center mt-16 text-xl">{listsById.title}</div>
+      {listsById && (
         <div className="grid grid-cols-1 ">
-          {list.items.map((item: any) => (
+          {listsById.items.map((item: any) => (
             <ItemCard key={item.id} item={item} />
           ))}
           <AddItemForm />
@@ -41,8 +43,8 @@ const Items = ({ list, status, fetchList, tripsById }: AppState) => {
 };
 
 const mapStateToProps = (state: any) => ({
-  list: state.list.listData,
-  status: state.list.getListStatus,
+  listsById: state.lists.byId,
+  status: state.lists.getListStatus,
   tripsById: state.trips.byId,
 });
 export default connect(mapStateToProps, { fetchList })(Items);
