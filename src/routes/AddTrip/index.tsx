@@ -7,11 +7,12 @@ import createTrip from '../../actions/createTrip';
 interface ComponentStateProps {
   createTrip: any;
   status: any;
+  trip: any;
 }
 
 type AppState = ComponentStateProps;
 
-const AddTrip = ({ createTrip, status }: AppState) => {
+const AddTrip = ({ createTrip, status, trip }: AppState) => {
   /* eslint-disable */
   const [newTrip, setNewTrip] = useState({ destination: '', title: '', travel_method: '' });
   /* eslint-enable */
@@ -29,7 +30,7 @@ const AddTrip = ({ createTrip, status }: AppState) => {
   };
 
   if (status === 'success') {
-    return <Redirect to="/past" />;
+    return <Redirect push to={`/trip/${trip.id}`} />;
   }
   return (
     <div>
@@ -88,6 +89,7 @@ const AddTrip = ({ createTrip, status }: AppState) => {
 
 const mapStateToProps = (state: any) => ({
   status: state.createTrip.getCreateTripStatus,
+  trip: state.createTrip.newTrip,
 });
 
 export default connect(mapStateToProps, { createTrip })(AddTrip);
