@@ -10,16 +10,14 @@ interface ComponentStateProps {
   list: any;
   status: any;
   fetchList: any;
-  trips: any;
+  tripsById: any;
 }
 type AppState = ComponentStateProps;
 
-const Items = ({ list, status, fetchList, trips }: AppState) => {
-  const { id } = useParams();
-  const currentTrip = trips.find((trip: any) => {
-    return trip.id === Number(id);
-  });
-  console.log(trips);
+const Items = ({ list, status, fetchList, tripsById }: AppState) => {
+  const { id }: any = useParams();
+  const currentTrip = tripsById[id];
+
   useEffect(() => {
     fetchList(currentTrip.listId);
   }, [id]);
@@ -45,6 +43,6 @@ const Items = ({ list, status, fetchList, trips }: AppState) => {
 const mapStateToProps = (state: any) => ({
   list: state.list.listData,
   status: state.list.getListStatus,
-  trips: state.trips.trips,
+  tripsById: state.trips.byId,
 });
 export default connect(mapStateToProps, { fetchList })(Items);
