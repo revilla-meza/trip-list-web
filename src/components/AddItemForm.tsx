@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import SVGIcon from './SVGIcon';
 
-const AddItemForm = ({listOfItems}: any) => {
+const AddItemForm = ({ listOfItems }: any) => {
   const [newItem, setNewItem] = useState('');
 
   const onchangeHandler = (e: any) => {

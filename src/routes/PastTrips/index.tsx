@@ -22,22 +22,22 @@ const PastTripsList = ({ tripIds, tripsById, fetchTrips, status }: AppState) => 
     return <p className="mt-32  font-sans text-lg font-bold text-center  ">loading...</p>;
   }
   return (
-    <div >
+    <div>
       <div>
-      <h1 className="mt-8 mb-16 ml-8 font-sans text-lg font-bold ">Past Trips</h1>
+        <h1 className="mt-8 mb-16 ml-8 font-sans text-lg font-bold ">Past Trips</h1>
 
-      {tripIds.length === 0 && (
-        <h1 className="mt-32  font-sans text-lg font-bold text-center  ">
-          Welcome to Trip List
-          <br />
-          Please add a new Trip
-        </h1>
-      )}
-      {tripIds.map((id: any) => (
-        <Link to={`/trip/${id}`} key={id}>
-          <PastTripsCard key={id} trips={tripsById[id]} />
-        </Link>
-      ))}
+        {tripIds.length === 0 && (
+          <h1 className="mt-32  font-sans text-lg font-bold text-center  ">
+            Welcome to Trip List
+            <br />
+            Please add a new Trip
+          </h1>
+        )}
+        {tripIds.map((id: any) => (
+          <Link to={`/trip/${id}`} key={id}>
+            <PastTripsCard key={id} trips={tripsById[id]} />
+          </Link>
+        ))}
       </div>
       <NavBar />
     </div>
