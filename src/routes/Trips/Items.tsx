@@ -1,22 +1,50 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import NavBar from '../../components/NavBar';
-import mockData from './mockData.js';
 import ItemCard from './ItemCard';
+import { connect } from 'react-redux';
+import fetchList from '../../actions/fetchList';
+import { useParams } from 'react-router-dom';
+import AddItemForm from '../../components/AddItemForm';
 
-const Items = () => {
-  const [mockItems] = useState(mockData);
+interface ComponentStateProps {
+  listsById: any;
+  status: any;
+  fetchList: any;
+  tripsById: any;
+}
+type AppState = ComponentStateProps;
+
+const Items = ({ listsById, status, fetchList, tripsById }: AppState) => {
+  const { id }: any = useParams();
+  const currentTrip = tripsById[id];
+  useEffect(() => {
+    if (!listsById[currentTrip.listId]) {
+      fetchList(currentTrip.listId);
+    }
+  }, [id]);
+
+  if (status === 'loading' || !listsById[currentTrip.listId]) {
+    return <p className="mt-32  font-sans text-lg font-bold text-center  ">loading...</p>;
+  }
   return (
     <div>
-      <div className="bg-indigo-200 text-center mt-16">Untitled List</div>
-      <div className="grid grid-cols-1 ">
-        {mockItems.map((item: any) => (
-          <ItemCard key={item.id} item={item} />
-        ))}
-      </div>
-
+      <div className="bg-indigo-200 text-center mt-16 text-xl">{listsById[currentTrip.listId].title}</div>
+      {listsById && (
+        <div className="grid grid-cols-1 ">
+          {listsById[currentTrip.listId].items.map((item: any) => (
+            <ItemCard key={item.id} item={item} />
+          ))}
+          <AddItemForm listOfItems={listsById[currentTrip.listId].items.length} />
+        </div>
+      )}
       <NavBar />
     </div>
   );
 };
 
-export default Items;
+const mapStateToProps = (state: any) => ({
+  listsById: state.lists.byId,
+  status: state.lists.getListStatus,
+  tripsById: state.trips.byId,
+});
+export default connect(mapStateToProps, { fetchList })(Items);
