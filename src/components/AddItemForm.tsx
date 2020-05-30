@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import SVGIcon from './SVGIcon';
 
-const AddItemForm = () => {
+const AddItemForm = ({listOfItems}: any) => {
   const [newItem, setNewItem] = useState('');
 
   const onchangeHandler = (e: any) => {
@@ -22,7 +22,7 @@ const AddItemForm = () => {
           className="w-full"
           name="newItem"
           type="text"
-          placeholder="Add item"
+          placeholder={listOfItems === 0 ? 'Add your first item!' : 'Add new item'}
           value={newItem}
           onChange={onchangeHandler}
         ></input>

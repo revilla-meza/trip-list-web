@@ -22,7 +22,8 @@ const PastTripsList = ({ tripIds, tripsById, fetchTrips, status }: AppState) => 
     return <p className="mt-32  font-sans text-lg font-bold text-center  ">loading...</p>;
   }
   return (
-    <div>
+    <div >
+      <div>
       <h1 className="mt-8 mb-16 ml-8 font-sans text-lg font-bold ">Past Trips</h1>
 
       {tripIds.length === 0 && (
@@ -37,6 +38,7 @@ const PastTripsList = ({ tripIds, tripsById, fetchTrips, status }: AppState) => 
           <PastTripsCard key={id} trips={tripsById[id]} />
         </Link>
       ))}
+      </div>
       <NavBar />
     </div>
   );

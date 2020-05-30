@@ -22,7 +22,10 @@ const listByIdReducer = (state = initialState, action: ListAction): ListState =>
     case FETCH_LIST_START:
       return { ...state, getListStatus: requestStatus.loading };
     case FETCH_LIST_SUCCESS:
-      return { byId: action.payload, getListStatus: requestStatus.success };
+      return {
+        byId: { ...state.byId, [action.payload.id]: action.payload },
+        getListStatus: requestStatus.success,
+      };
     case FETCH_LIST_ERROR:
       return { ...state, getListStatus: requestStatus.error };
     case CREATE_TRIP_SUCCESS:

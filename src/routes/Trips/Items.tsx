@@ -17,24 +17,25 @@ type AppState = ComponentStateProps;
 const Items = ({ listsById, status, fetchList, tripsById }: AppState) => {
   const { id }: any = useParams();
   const currentTrip = tripsById[id];
-
+  console.log(currentTrip);
   useEffect(() => {
     if (!listsById[currentTrip.listId]) {
       fetchList(currentTrip.listId);
     }
   }, [id]);
+
   if (status === 'loading') {
     return <p className="mt-32  font-sans text-lg font-bold text-center  ">loading...</p>;
   }
   return (
     <div>
-      <div className="bg-indigo-200 text-center mt-16 text-xl">{listsById.title}</div>
+      <div className="bg-indigo-200 text-center mt-16 text-xl">{listsById[currentTrip.listId].title}</div>
       {listsById && (
         <div className="grid grid-cols-1 ">
-          {listsById.items.map((item: any) => (
+          {listsById[currentTrip.listId].items.map((item: any) => (
             <ItemCard key={item.id} item={item} />
           ))}
-          <AddItemForm />
+          <AddItemForm listOfItems={listsById[currentTrip.listId].items.length} />
         </div>
       )}
       <NavBar />
