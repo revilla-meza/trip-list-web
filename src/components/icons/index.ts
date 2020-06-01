@@ -4,6 +4,7 @@ import PastIcon from './PastIcon';
 import ArrowBack from './ArrowBack';
 import NoCheck from './NoCheck';
 import Checked from './Checked';
+import AddItemIcon from './AddItemIcon';
 
 export default {
   AddIcon,
@@ -12,4 +13,5 @@ export default {
   PastIcon,
   NoCheck,
   Checked,
+  AddItemIcon,
 };

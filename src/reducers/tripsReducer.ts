@@ -1,9 +1,11 @@
 import { requestStatus } from '../types/index';
 import { FETCH_TRIPS_START, FETCH_TRIPS_SUCCESS, FETCH_TRIPS_ERROR } from '../actions/fetchTrips';
-export type tripsActions = 'FETCH_TRIPS_START' | 'FETCH_TRIPS_SUCCESS' | 'FETCH_TRIPS_ERROR';
+import { CREATE_TRIP_SUCCESS } from '../actions/createTrip';
+export type tripsActions = 'FETCH_TRIPS_START' | 'FETCH_TRIPS_SUCCESS' | 'FETCH_TRIPS_ERROR' | 'CREATE_TRIP_SUCCESS';
 
 export interface TripsState {
-  trips?: any;
+  ids?: any;
+  byId?: any;
   getTripsStatus: requestStatus;
 }
 
@@ -12,7 +14,8 @@ interface TripsAction {
   payload?: any;
 }
 const initialState = {
-  trips: [],
+  ids: [],
+  byId: {},
   getTripsStatus: requestStatus.loading,
 };
 
@@ -21,9 +24,23 @@ const tripsReducer = (state = initialState, action: TripsAction): TripsState => 
     case FETCH_TRIPS_START:
       return { ...state, getTripsStatus: requestStatus.loading };
     case FETCH_TRIPS_SUCCESS:
-      return { trips: action.payload, getTripsStatus: requestStatus.success };
+      const newState = action.payload.reduce(
+        (output: any, el: any) => {
+          output.ids.push(el.id);
+          output.byId[el.id] = el;
+          return output;
+        },
+        { ids: [], byId: {} },
+      );
+      return { ...newState, getTripsStatus: requestStatus.success };
     case FETCH_TRIPS_ERROR:
       return { ...state, getTripsStatus: requestStatus.error };
+    case CREATE_TRIP_SUCCESS:
+      return {
+        ids: [...state.ids, action.payload.id],
+        byId: { ...state.byId, [action.payload.id]: action.payload },
+        getTripsStatus: requestStatus.success,
+      };
     default:
       return state;
   }

@@ -25,7 +25,7 @@ function App({ user }: AppState) {
   }, [user]);
 
   return (
-    <div>
+    <div className="pb-32">
       <Switch>
         <Redirect exact from="/" to="/signup" />
         <PrivateRoute component={PastTripList} path="/past" />

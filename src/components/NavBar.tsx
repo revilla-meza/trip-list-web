@@ -22,7 +22,7 @@ const NavBar = () => {
   ];
 
   return (
-    <div className="flex flex-row justify-around border-gray-500 border-t inset-x-0 bottom-0 absolute fixed h-16 text-center">
+    <div className="flex flex-row justify-around border-gray-500 border-t inset-x-0 bottom-0 bg-white fixed h-16 text-center">
       {navBarButtons.map(({ icon, label, path }) => (
         <NavBarButton icon={icon} label={label} path={path} key={path} />
       ))}

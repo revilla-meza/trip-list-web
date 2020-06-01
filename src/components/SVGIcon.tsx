@@ -1,7 +1,7 @@
 import React from 'react';
 import icons from './icons';
 
-type SupportedSVGIcons = 'AddIcon' | 'PastIcon' | 'ItemsIcon' | 'ArrowBack' | 'NoCheck' | 'Checked';
+type SupportedSVGIcons = 'AddIcon' | 'PastIcon' | 'ItemsIcon' | 'ArrowBack' | 'NoCheck' | 'Checked' | 'AddItemIcon';
 
 interface SVGIconProps {
   icon: SupportedSVGIcons;
