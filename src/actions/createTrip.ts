@@ -16,7 +16,6 @@ const createTrip = (newTrip: any) => async (dispatch: any, getState: any) => {
       userId,
       body,
     });
-    console.log(addTrip);
     dispatch({ payload: addTrip, type: 'CREATE_TRIP_SUCCESS' });
   } catch (e) {
     dispatch({ type: 'CREATE_TRIP_ERROR' });
