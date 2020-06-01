@@ -16,7 +16,7 @@ interface TripsAction {
 const initialState = {
   ids: [],
   byId: {},
-  getTripsStatus: requestStatus.loading,
+  getTripsStatus: requestStatus.ready,
 };
 
 const tripsReducer = (state = initialState, action: TripsAction): TripsState => {

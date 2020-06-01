@@ -14,7 +14,7 @@ interface ListAction {
 
 const initialState = {
   byId: {},
-  getListStatus: requestStatus.loading,
+  getListStatus: requestStatus.ready,
 };
 
 const listByIdReducer = (state = initialState, action: ListAction): ListState => {
