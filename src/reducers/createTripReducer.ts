@@ -14,7 +14,7 @@ interface createTripAction {
 }
 const initialState = {
   newTrip: {},
-  getCreateTripStatus: requestStatus.loading,
+  getCreateTripStatus: requestStatus.ready,
 };
 
 const createTripReducer = (state = initialState, action: createTripAction): CreateTripState => {
