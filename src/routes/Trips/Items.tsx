@@ -21,7 +21,7 @@ const Items = ({ listsById, status, fetchList, tripsById }: AppState) => {
     if (!listsById[currentTrip.listId]) {
       fetchList(currentTrip.listId);
     }
-  }, [id]);
+  }, []);
 
   if (status === 'loading' || !listsById[currentTrip.listId]) {
     return <p className="mt-32  font-sans text-lg font-bold text-center  ">loading...</p>;
