@@ -3,6 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 import SVGIcon from '../../components/SVGIcon';
 import { connect } from 'react-redux';
 import createTrip from '../../actions/createTrip';
+import fetchList from '../../actions/fetchList';
 
 interface ComponentStateProps {
   createTrip: any;
