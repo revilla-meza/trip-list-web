@@ -13,7 +13,7 @@ interface ComponentStateProps {
 
 type AppState = ComponentStateProps;
 
-const AddTrip = ({ createTrip, status, trip}: AppState) => {
+const AddTrip = ({ createTrip, status, trip }: AppState) => {
   /* eslint-disable */
   const [newTrip, setNewTrip] = useState({ destination: '', title: '', travel_method: '' });
   /* eslint-enable */
@@ -93,4 +93,4 @@ const mapStateToProps = (state: any) => ({
   trip: state.createTrip.newTrip,
 });
 
-export default connect(mapStateToProps, { createTrip})(AddTrip);
+export default connect(mapStateToProps, { createTrip })(AddTrip);
