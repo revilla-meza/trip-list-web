@@ -41,7 +41,7 @@ const Items = ({ listsById, getListStatus, fetchList, tripsById, getOneTripStatu
 
   if (isListLoading) {
     return <p className="mt-32  font-sans text-lg font-bold text-center  ">loading...</p>;
-  } 
+  }
 
   if (isListPresent) {
     return (
@@ -61,7 +61,6 @@ const Items = ({ listsById, getListStatus, fetchList, tripsById, getOneTripStatu
   }
 
   return null;
-
 };
 
 const mapStateToProps = (state: any) => ({
