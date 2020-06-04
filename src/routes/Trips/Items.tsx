@@ -8,24 +8,27 @@ import AddItemForm from '../../components/AddItemForm';
 
 interface ComponentStateProps {
   listsById: any;
-  status: any;
+  getListStatus: any;
+  getOneTripStatus: any;
   fetchList: any;
   tripsById: any;
 }
 type AppState = ComponentStateProps;
 
-const Items = ({ listsById, status, fetchList, tripsById }: AppState) => {
+const Items = ({ listsById, getListStatus, fetchList, tripsById }: AppState) => {
   const { id }: any = useParams();
   const currentTrip = tripsById[id];
+  const listId = currentTrip && currentTrip.listId;
 
-  // here
   useEffect(() => {
-    if (!listsById[currentTrip.listId] && status !== 'loading') {
+    if (!currentTrip || ) {
+
+    } else if (!listsById[listId] && getListStatus !== 'loading') {
       fetchList(currentTrip.listId);
     }
   });
 
-  if (status === 'loading' || !listsById[currentTrip.listId]) {
+  if (getListStatus === 'loading' || !listsById[currentTrip.listId]) {
     return <p className="mt-32  font-sans text-lg font-bold text-center  ">loading...</p>;
   }
   return (
@@ -46,7 +49,7 @@ const Items = ({ listsById, status, fetchList, tripsById }: AppState) => {
 
 const mapStateToProps = (state: any) => ({
   listsById: state.lists.byId,
-  status: state.lists.getListStatus,
+  getListStatus: state.lists.getListStatus,
   tripsById: state.trips.byId,
 });
 export default connect(mapStateToProps, { fetchList })(Items);
