@@ -17,6 +17,8 @@ type AppState = ComponentStateProps;
 const Items = ({ listsById, status, fetchList, tripsById }: AppState) => {
   const { id }: any = useParams();
   const currentTrip = tripsById[id];
+
+  // here
   useEffect(() => {
     if (!listsById[currentTrip.listId] && status !== 'loading') {
       fetchList(currentTrip.listId);
