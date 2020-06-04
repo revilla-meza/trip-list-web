@@ -3,7 +3,14 @@ import { FETCH_TRIPS_START, FETCH_TRIPS_SUCCESS, FETCH_TRIPS_ERROR } from '../ac
 import { FETCH_ONE_TRIP_START, FETCH_ONE_TRIP_SUCCESS, FETCH_ONE_TRIP_ERROR } from '../actions/fetchOneTrip';
 
 import { CREATE_TRIP_SUCCESS } from '../actions/createTrip';
-export type tripsActions = 'FETCH_TRIPS_START' | 'FETCH_TRIPS_SUCCESS' | 'FETCH_TRIPS_ERROR' | 'CREATE_TRIP_SUCCESS';
+export type tripsActions =
+  | 'FETCH_TRIPS_START'
+  | 'FETCH_TRIPS_SUCCESS'
+  | 'FETCH_TRIPS_ERROR'
+  | 'CREATE_TRIP_SUCCESS'
+  | 'FETCH_ONE_TRIP_ERROR'
+  | 'FETCH_ONE_TRIP_START'
+  | 'FETCH_ONE_TRIP_SUCCESS';
 
 export interface TripsState {
   ids?: any;
@@ -49,14 +56,14 @@ const tripsReducer = (state = initialState, action: TripsAction): TripsState => 
     case FETCH_ONE_TRIP_START:
       return {
         ...state,
-        getOneTripStatus: requestStatus.loading, 
+        getOneTripStatus: requestStatus.loading,
       };
     case FETCH_ONE_TRIP_SUCCESS:
-      const newTrip = { ...action.payload, list: undefined }; 
+      const newTrip = { ...action.payload, list: undefined };
       return {
         ...state,
-        getOneTripStatus: requestStatus.loading,
-        byId: { ...state.byId, [newTrip.id]: newTrip }
+        getOneTripStatus: requestStatus.success,
+        byId: { ...state.byId, [newTrip.id]: newTrip },
       };
     case FETCH_TRIPS_ERROR:
       return { ...state, getOneTripStatus: requestStatus.error };
