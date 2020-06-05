@@ -32,11 +32,12 @@ const listByIdReducer = (state = initialState, action: ListAction): ListState =>
   switch (action.type) {
     case FETCH_LIST_START:
       return { ...state, getListStatus: requestStatus.loading };
-    case FETCH_LIST_SUCCESS:
-      return {
-        byId: { ...state.byId, [action.payload.id]: action.payload },
+      case FETCH_LIST_SUCCESS:
+      const itemIds = action.payload.items.map((it: { id: any; }) => it.id);
+        return {
+        byId: { ...state.byId, [action.payload.id]: { ...action.payload, itemIds } },
         getListStatus: requestStatus.success,
-      };
+        };
     case FETCH_LIST_ERROR:
       return { ...state, getListStatus: requestStatus.error };
     case CREATE_TRIP_SUCCESS:

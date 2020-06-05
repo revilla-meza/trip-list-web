@@ -65,7 +65,7 @@ const tripsReducer = (state = initialState, action: TripsAction): TripsState => 
         getOneTripStatus: requestStatus.success,
         byId: { ...state.byId, [newTrip.id]: newTrip },
       };
-    case FETCH_TRIPS_ERROR:
+    case FETCH_ONE_TRIP_ERROR:
       return { ...state, getOneTripStatus: requestStatus.error };
     default:
       return state;

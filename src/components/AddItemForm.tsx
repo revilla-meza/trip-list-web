@@ -1,15 +1,34 @@
 import React, { useState } from 'react';
 import SVGIcon from './SVGIcon';
+import { connect } from 'react-redux'
+import createItem from '../actions/createItem'
 
-const AddItemForm = ({ listOfItems }: any) => {
-  const [newItem, setNewItem] = useState('');
+interface ComponentStateProps {
+  getItemStatus: any;
+  createItem: any;
+  listOfItems: any;
+  listId: any;
+}
+
+type AppState = ComponentStateProps;
+
+type InewItem = {
+  list: number;
+  label: string;
+}
+
+
+const AddItemForm = ({ listOfItems, getItemStatus, createItem, listId }: AppState) => {
+  const [newItem, setNewItem] = useState<InewItem>({ list: listId, label: '' });
 
   const onchangeHandler = (e: any) => {
-    setNewItem(e.target.value);
+    setNewItem({ ...newItem, label: e.target.value });
+    
   };
-
+  console.log(newItem);
   const submitHandler = (e: any) => {
     e.preventDefault();
+    createItem(newItem);
   };
 
   return (
@@ -23,7 +42,6 @@ const AddItemForm = ({ listOfItems }: any) => {
           name="newItem"
           type="text"
           placeholder={listOfItems === 0 ? 'Add your first item!' : 'Add new item'}
-          value={newItem}
           onChange={onchangeHandler}
         ></input>
       </div>
@@ -31,4 +49,10 @@ const AddItemForm = ({ listOfItems }: any) => {
   );
 };
 
-export default AddItemForm;
+const mapStateToProps = (state: any) => ({
+
+  getItemStatus: state.items.getItemStatus,
+
+})
+
+export default connect(mapStateToProps, {createItem})(AddItemForm);
