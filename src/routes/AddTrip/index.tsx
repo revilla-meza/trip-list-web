@@ -4,7 +4,6 @@ import SVGIcon from '../../components/SVGIcon';
 import { connect } from 'react-redux';
 import createTrip from '../../actions/createTrip';
 
-
 interface ComponentStateProps {
   createTrip: any;
   status: any;

@@ -3,7 +3,7 @@ import createTripReducer from './createTripReducer';
 import userReducer from './userReducer';
 import tripsReducer from './tripsReducer';
 import listByIdReducer from './listByIdReducer';
-import itemsByIdReducer from './itemsByIdReducer'
+import itemsByIdReducer from './itemsByIdReducer';
 
 const reducers = combineReducers({
   user: userReducer,
