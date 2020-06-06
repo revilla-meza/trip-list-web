@@ -22,14 +22,11 @@ const initialState = {
 const itemsByIdReducer = (state = initialState, action: ItemAction): ItemState => {
   switch (action.type) {
     case FETCH_LIST_SUCCESS:
-      const newState = action.payload.items.reduce(
-        (output: any, el: any) => {
-          output.byId[el.id] = el;
-          return output;
-        },
-        { byId: {} },
-      );
-      return { ...newState, getItemStatus: requestStatus.success };
+      const newItems = action.payload.items.reduce((output: any, el: any) => {
+        output[el.id] = el;
+        return output;
+      }, {});
+      return { byId: { ...state.byId, ...newItems }, getItemStatus: requestStatus.success };
     case CREATE_ITEM_START:
       return { ...state, getItemStatus: requestStatus.loading };
     case CREATE_ITEM_SUCCESS:
@@ -38,7 +35,7 @@ const itemsByIdReducer = (state = initialState, action: ItemAction): ItemState =
         getItemStatus: requestStatus.success,
       };
     case CREATE_ITEM_ERROR:
-        return { ...state, getItemStatus: requestStatus.error };
+      return { ...state, getItemStatus: requestStatus.error };
     default:
       return state;
   }

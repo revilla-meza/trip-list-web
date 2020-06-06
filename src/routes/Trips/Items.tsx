@@ -31,7 +31,6 @@ const Items = ({ listsById, getListStatus, fetchList, tripsById, getOneTripStatu
   const isListLoading = getListStatus === 'loading' || getOneTripStatus == 'loading';
 
   const isListPresent = currentTrip && listsById[listId];
-  console.log(items)
   useEffect(() => {
     if (!isTripPresentOrOnTheWay) {
       fetchOneTrip(id);

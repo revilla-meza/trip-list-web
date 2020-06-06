@@ -16,7 +16,6 @@ const createItem = (newItem: any) => async (dispatch: any, getState: any) => {
       userId,
       body,
     });
-    console.log(addItem)
     dispatch({ payload: addItem, type: 'CREATE_ITEM_SUCCESS' });
   } catch (e) {
     dispatch({ type: 'CREATE_ITEM_ERROR' });
