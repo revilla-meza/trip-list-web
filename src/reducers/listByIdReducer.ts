@@ -2,6 +2,7 @@ import { requestStatus } from '../types/index';
 import { FETCH_LIST_SUCCESS, FETCH_LIST_START, FETCH_LIST_ERROR } from '../actions/fetchList';
 import { FETCH_ONE_TRIP_SUCCESS } from '../actions/fetchOneTrip';
 import { CREATE_TRIP_SUCCESS } from '../actions/createTrip';
+import { CREATE_ITEM_SUCCESS } from '../actions/createItem';
 
 export type ListActions =
   | 'FETCH_LIST_SUCCESS'
@@ -11,7 +12,8 @@ export type ListActions =
   | 'FETCH_ONE_TRIP_ERROR'
   | 'FETCH_ONE_TRIP_ERROR'
   | 'FETCH_ONE_TRIP_START'
-  | 'FETCH_ONE_TRIP_SUCCESS';
+  | 'FETCH_ONE_TRIP_SUCCESS'
+  | 'CREATE_ITEM_SUCCESS';
 
 export interface ListState {
   byId: any;
@@ -28,13 +30,14 @@ const initialState = {
   getListStatus: requestStatus.ready,
 };
 
-const listByIdReducer = (state = initialState, action: ListAction): ListState => {
+const listByIdReducer = (state: ListState = initialState, action: ListAction): ListState => {
   switch (action.type) {
     case FETCH_LIST_START:
       return { ...state, getListStatus: requestStatus.loading };
     case FETCH_LIST_SUCCESS:
+      const itemIds = action.payload.items.map((it: { id: any }) => it.id);
       return {
-        byId: { ...state.byId, [action.payload.id]: action.payload },
+        byId: { ...state.byId, [action.payload.id]: { ...action.payload, itemIds } },
         getListStatus: requestStatus.success,
       };
     case FETCH_LIST_ERROR:
@@ -49,6 +52,12 @@ const listByIdReducer = (state = initialState, action: ListAction): ListState =>
       const list = { ...action.payload.list, items: [] };
       return {
         byId: { ...state.byId, [action.payload.listId]: list },
+        getListStatus: requestStatus.success,
+      };
+    case CREATE_ITEM_SUCCESS:
+      const newItems = state.byId[action.payload.listId].itemIds.concat(action.payload.id);
+      return {
+        byId: { ...state.byId, [action.payload.listId]: { ...state.byId[action.payload.listId], itemIds: newItems } },
         getListStatus: requestStatus.success,
       };
     default:

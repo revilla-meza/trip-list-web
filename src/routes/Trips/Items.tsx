@@ -14,10 +14,11 @@ interface ComponentStateProps {
   fetchList: any;
   tripsById: any;
   fetchOneTrip: any;
+  items: any;
 }
 type AppState = ComponentStateProps;
 
-const Items = ({ listsById, getListStatus, fetchList, tripsById, getOneTripStatus, fetchOneTrip }: AppState) => {
+const Items = ({ listsById, getListStatus, fetchList, tripsById, getOneTripStatus, fetchOneTrip, items }: AppState) => {
   const { id }: any = useParams();
   const currentTrip = tripsById[id];
 
@@ -30,7 +31,6 @@ const Items = ({ listsById, getListStatus, fetchList, tripsById, getOneTripStatu
   const isListLoading = getListStatus === 'loading' || getOneTripStatus == 'loading';
 
   const isListPresent = currentTrip && listsById[listId];
-
   useEffect(() => {
     if (!isTripPresentOrOnTheWay) {
       fetchOneTrip(id);
@@ -38,7 +38,6 @@ const Items = ({ listsById, getListStatus, fetchList, tripsById, getOneTripStatu
       fetchList(currentTrip.listId);
     }
   });
-
   if (isListLoading) {
     return <p className="mt-32  font-sans text-lg font-bold text-center  ">loading...</p>;
   }
@@ -49,10 +48,10 @@ const Items = ({ listsById, getListStatus, fetchList, tripsById, getOneTripStatu
         <div className="bg-indigo-200 text-center mt-16 text-xl">{listsById[listId].title}</div>
         {listsById && (
           <div className="grid grid-cols-1 ">
-            {listsById[currentTrip.listId].items.map((item: any) => (
-              <ItemCard key={item.id} item={item} />
+            {listsById[currentTrip.listId].itemIds.map((itemId: any) => (
+              <ItemCard key={itemId} item={items[itemId]} />
             ))}
-            <AddItemForm listOfItems={listsById[listId].items.length} />
+            <AddItemForm listOfItems={listsById[listId].items.length} listId={currentTrip.listId} />
           </div>
         )}
         <NavBar />
@@ -65,6 +64,7 @@ const Items = ({ listsById, getListStatus, fetchList, tripsById, getOneTripStatu
 
 const mapStateToProps = (state: any) => ({
   listsById: state.lists.byId,
+  items: state.items.byId,
   getListStatus: state.lists.getListStatus,
   tripsById: state.trips.byId,
   getOneTripStatus: state.trips.getOneTripStatus,
