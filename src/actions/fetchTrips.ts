@@ -3,7 +3,7 @@ export const FETCH_TRIPS_START = 'FETCH_TRIPS_START';
 export const FETCH_TRIPS_SUCCESS = 'FETCH_TRIPS_SUCCESS';
 export const FETCH_TRIPS_ERROR = 'FETCH_TRIPS_ERROR';
 
-const fetchTrips = (doInBackground:boolean) => async (dispatch: any, getState: any) => {
+const fetchTrips = (doInBackground: boolean) => async (dispatch: any, getState: any) => {
   const { userId } = getState().user;
 
   if (!doInBackground) {
@@ -15,7 +15,7 @@ const fetchTrips = (doInBackground:boolean) => async (dispatch: any, getState: a
 
     if (doInBackground) {
       const currentTripsLength = getState.trips.ids.length;
-      
+
       if (trips.length > currentTripsLength) {
         dispatch({ payload: trips, type: FETCH_TRIPS_SUCCESS });
       }
