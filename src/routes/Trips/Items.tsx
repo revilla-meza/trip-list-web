@@ -38,7 +38,6 @@ const Items = ({ listsById, getListStatus, fetchList, tripsById, getOneTripStatu
       fetchList(currentTrip.listId);
     }
   });
-
   if (isListLoading) {
     return <p className="mt-32  font-sans text-lg font-bold text-center  ">loading...</p>;
   }

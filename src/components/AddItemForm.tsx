@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import SVGIcon from './SVGIcon';
 import { connect } from 'react-redux';
 import createItem from '../actions/createItem';
-import fetchList from '../actions/fetchList';
+
 
 interface ComponentStateProps {
   getItemStatus: any;
   createItem: any;
   listOfItems: any;
   listId: any;
-  fetchList: any;
 }
 
 type AppState = ComponentStateProps;
@@ -19,7 +18,7 @@ type InewItem = {
   label: string;
 };
 
-const AddItemForm = ({ listOfItems, getItemStatus, createItem, listId, fetchList }: AppState) => {
+const AddItemForm = ({ listOfItems, getItemStatus, createItem, listId }: AppState) => {
   const [newItem, setNewItem] = useState<InewItem>({ list: listId, label: '' });
   const textInputRef: any = React.useRef(null);
 
@@ -30,7 +29,6 @@ const AddItemForm = ({ listOfItems, getItemStatus, createItem, listId, fetchList
     e.preventDefault();
     if (newItem.label !== '') {
       createItem(newItem);
-      setTimeout(() => fetchList(listId), 200);
     }
     textInputRef.current.value = '';
   };
@@ -58,4 +56,4 @@ const mapStateToProps = (state: any) => ({
   getItemStatus: state.items.getItemStatus,
 });
 
-export default connect(mapStateToProps, { createItem, fetchList })(AddItemForm);
+export default connect(mapStateToProps, { createItem })(AddItemForm);
