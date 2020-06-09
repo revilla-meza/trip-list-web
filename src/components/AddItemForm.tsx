@@ -3,7 +3,6 @@ import SVGIcon from './SVGIcon';
 import { connect } from 'react-redux';
 import createItem from '../actions/createItem';
 
-
 interface ComponentStateProps {
   getItemStatus: any;
   createItem: any;
