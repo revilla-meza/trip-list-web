@@ -16,8 +16,10 @@ type AppState = ComponentStateProps;
 
 const PastTripsList = ({ tripIds, tripsById, fetchTrips, status }: AppState) => {
   useEffect(() => {
-    fetchTrips();
+    const doInBackground = tripIds.length > 0;
+    fetchTrips(doInBackground);
   }, [fetchTrips]);
+
   if (status === 'loading') {
     return <p className="mt-32  font-sans text-lg font-bold text-center  ">loading...</p>;
   }
