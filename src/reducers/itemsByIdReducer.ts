@@ -3,7 +3,12 @@ import { FETCH_LIST_SUCCESS } from '../actions/fetchList';
 import { CREATE_ITEM_SUCCESS, CREATE_ITEM_START, CREATE_ITEM_ERROR } from '../actions/createItem';
 import { FETCH_ONE_TRIP_SUCCESS } from '../actions/fetchOneTrip';
 
-export type ItemActions = 'FETCH_LIST_SUCCESS' | 'CREATE_ITEM_START' | 'CREATE_ITEM_ERROR' | 'CREATE_ITEM_SUCCESS' | 'FETCH_ONE_TRIP_SUCCESS';
+export type ItemActions =
+  | 'FETCH_LIST_SUCCESS'
+  | 'CREATE_ITEM_START'
+  | 'CREATE_ITEM_ERROR'
+  | 'CREATE_ITEM_SUCCESS'
+  | 'FETCH_ONE_TRIP_SUCCESS';
 
 export interface ItemState {
   byId: any;

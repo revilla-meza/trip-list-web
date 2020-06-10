@@ -42,7 +42,7 @@ const AddItemForm = ({ isListEmpty, getItemStatus, createItem, listId }: AppStat
           className="w-full"
           name="newItem"
           type="text"
-          placeholder={isListEmpty? 'Add your first item!' : 'Add new item'}
+          placeholder={isListEmpty ? 'Add your first item!' : 'Add new item'}
           onChange={onchangeHandler}
           ref={textInputRef}
         ></input>
