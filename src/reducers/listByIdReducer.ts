@@ -43,13 +43,13 @@ const listByIdReducer = (state: ListState = initialState, action: ListAction): L
     case FETCH_LIST_ERROR:
       return { ...state, getListStatus: requestStatus.error };
     case CREATE_TRIP_SUCCESS:
-      const listForTrip = { ...action.payload.list, items: [] };
+      const listForTrip = { ...action.payload.list, itemIds: [] };
       return {
         byId: { ...state.byId, [action.payload.listId]: listForTrip },
         getListStatus: requestStatus.success,
       };
     case FETCH_ONE_TRIP_SUCCESS:
-      const list = { ...action.payload.list, items: [] };
+      const list = { ...action.payload.list, itemIds: action.payload.list.items.map((it: { id: any }) => it.id) };
       return {
         byId: { ...state.byId, [action.payload.listId]: list },
         getListStatus: requestStatus.success,

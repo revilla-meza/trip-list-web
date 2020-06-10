@@ -51,7 +51,7 @@ const Items = ({ listsById, getListStatus, fetchList, tripsById, getOneTripStatu
             {listsById[currentTrip.listId].itemIds.map((itemId: any) => (
               <ItemCard key={itemId} item={items[itemId]} />
             ))}
-            <AddItemForm listOfItems={listsById[listId].items.length} listId={currentTrip.listId} />
+            <AddItemForm isListEmpty={listsById[listId].itemIds.length === 0} listId={currentTrip.listId} />
           </div>
         )}
         <NavBar />
