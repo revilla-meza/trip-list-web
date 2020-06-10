@@ -6,7 +6,7 @@ import createItem from '../actions/createItem';
 interface ComponentStateProps {
   getItemStatus: any;
   createItem: any;
-  listOfItems: any;
+  isListEmpty: boolean;
   listId: any;
 }
 
@@ -17,7 +17,7 @@ type InewItem = {
   label: string;
 };
 
-const AddItemForm = ({ listOfItems, getItemStatus, createItem, listId }: AppState) => {
+const AddItemForm = ({ isListEmpty, getItemStatus, createItem, listId }: AppState) => {
   const [newItem, setNewItem] = useState<InewItem>({ list: listId, label: '' });
   const textInputRef: any = React.useRef(null);
 
@@ -42,7 +42,7 @@ const AddItemForm = ({ listOfItems, getItemStatus, createItem, listId }: AppStat
           className="w-full"
           name="newItem"
           type="text"
-          placeholder={listOfItems === 0 ? 'Add your first item!' : 'Add new item'}
+          placeholder={isListEmpty ? 'Add your first item!' : 'Add new item'}
           onChange={onchangeHandler}
           ref={textInputRef}
         ></input>
