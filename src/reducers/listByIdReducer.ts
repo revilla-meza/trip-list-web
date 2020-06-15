@@ -3,6 +3,7 @@ import { FETCH_LIST_SUCCESS, FETCH_LIST_START, FETCH_LIST_ERROR } from '../actio
 import { FETCH_ONE_TRIP_SUCCESS } from '../actions/fetchOneTrip';
 import { CREATE_TRIP_SUCCESS } from '../actions/createTrip';
 import { CREATE_ITEM_SUCCESS } from '../actions/createItem';
+import { SET_ITEM_STATE } from '../actions/setItemState';
 
 export type ListActions =
   | 'FETCH_LIST_SUCCESS'
@@ -13,7 +14,8 @@ export type ListActions =
   | 'FETCH_ONE_TRIP_ERROR'
   | 'FETCH_ONE_TRIP_START'
   | 'FETCH_ONE_TRIP_SUCCESS'
-  | 'CREATE_ITEM_SUCCESS';
+  | 'CREATE_ITEM_SUCCESS'
+  | 'SET_ITEM_STATE';
 
 export interface ListState {
   byId: any;
@@ -37,19 +39,36 @@ const listByIdReducer = (state: ListState = initialState, action: ListAction): L
     case FETCH_LIST_SUCCESS:
       const itemIds = action.payload.items.map((it: { id: any }) => it.id);
       return {
-        byId: { ...state.byId, [action.payload.id]: { ...action.payload, itemIds } },
+        byId: {
+          ...state.byId,
+          [action.payload.id]: {
+            ...action.payload,
+            itemIds,
+            itemStates: itemIds.reduce((out: any, it: any) => {
+              out[it] = false;
+              return out;
+            }, {}),
+          },
+        },
         getListStatus: requestStatus.success,
       };
     case FETCH_LIST_ERROR:
       return { ...state, getListStatus: requestStatus.error };
     case CREATE_TRIP_SUCCESS:
-      const listForTrip = { ...action.payload.list, itemIds: [] };
+      const listForTrip = { ...action.payload.list, itemIds: [], itemStates: {} };
       return {
         byId: { ...state.byId, [action.payload.listId]: listForTrip },
         getListStatus: requestStatus.success,
       };
     case FETCH_ONE_TRIP_SUCCESS:
-      const list = { ...action.payload.list, itemIds: action.payload.list.items.map((it: { id: any }) => it.id) };
+      const list = {
+        ...action.payload.list,
+        itemIds: action.payload.list.items.map((it: { id: any }) => it.id),
+        itemStates: action.payload.list.items.reduce((out: any, it: any) => {
+          out[it.id] = false;
+          return out;
+        }, {}),
+      };
       return {
         byId: { ...state.byId, [action.payload.listId]: list },
         getListStatus: requestStatus.success,
@@ -59,6 +78,20 @@ const listByIdReducer = (state: ListState = initialState, action: ListAction): L
       return {
         byId: { ...state.byId, [action.payload.listId]: { ...state.byId[action.payload.listId], itemIds: newItems } },
         getListStatus: requestStatus.success,
+      };
+    case SET_ITEM_STATE:
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [action.payload.listId]: {
+            ...state.byId[action.payload.listId],
+            itemStates: {
+              ...state.byId[action.payload.listId].itemStates,
+              [action.payload.itemId]: action.payload.state,
+            },
+          },
+        },
       };
     default:
       return state;
