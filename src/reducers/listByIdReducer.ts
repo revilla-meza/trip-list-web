@@ -39,10 +39,17 @@ const listByIdReducer = (state: ListState = initialState, action: ListAction): L
     case FETCH_LIST_SUCCESS:
       const itemIds = action.payload.items.map((it: { id: any }) => it.id);
       return {
-        byId: { ...state.byId, [action.payload.id]: { ...action.payload, itemIds, itemStates: itemIds.reduce((out:any, it:any)=>{ 
-          out[it] = false; 
-          return out;
-        }, {}) } },
+        byId: {
+          ...state.byId,
+          [action.payload.id]: {
+            ...action.payload,
+            itemIds,
+            itemStates: itemIds.reduce((out: any, it: any) => {
+              out[it] = false;
+              return out;
+            }, {}),
+          },
+        },
         getListStatus: requestStatus.success,
       };
     case FETCH_LIST_ERROR:
@@ -57,10 +64,10 @@ const listByIdReducer = (state: ListState = initialState, action: ListAction): L
       const list = {
         ...action.payload.list,
         itemIds: action.payload.list.items.map((it: { id: any }) => it.id),
-        itemStates: action.payload.list.items.reduce((out:any, it:any)=>{ 
-          out[it.id] = false; 
+        itemStates: action.payload.list.items.reduce((out: any, it: any) => {
+          out[it.id] = false;
           return out;
-        }, {}),  
+        }, {}),
       };
       return {
         byId: { ...state.byId, [action.payload.listId]: list },
@@ -81,11 +88,11 @@ const listByIdReducer = (state: ListState = initialState, action: ListAction): L
             ...state.byId[action.payload.listId],
             itemStates: {
               ...state.byId[action.payload.listId].itemStates,
-              [action.payload.itemId]: action.payload.state
-            }
-          }
-        }
-      }
+              [action.payload.itemId]: action.payload.state,
+            },
+          },
+        },
+      };
     default:
       return state;
   }

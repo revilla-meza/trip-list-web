@@ -62,10 +62,15 @@ const Items = ({
         {listsById && (
           <div className="grid grid-cols-1 ">
             {listsById[currentTrip.listId].itemIds.map((itemId: any) => (
-              <ItemCard key={itemId} item={items[itemId]} isChecked={itemStates[itemId]} toggleChecked={() => {
-                const state = !itemStates[itemId];
-                setItemState({ listId, itemId, state })
-              }} />
+              <ItemCard
+                key={itemId}
+                item={items[itemId]}
+                isChecked={itemStates[itemId]}
+                toggleChecked={() => {
+                  const state = !itemStates[itemId];
+                  setItemState({ listId, itemId, state });
+                }}
+              />
             ))}
             <AddItemForm isListEmpty={listsById[listId].itemIds.length === 0} listId={currentTrip.listId} />
           </div>
