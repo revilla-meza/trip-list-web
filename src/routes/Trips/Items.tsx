@@ -4,6 +4,7 @@ import ItemCard from './ItemCard';
 import { connect } from 'react-redux';
 import fetchList from '../../actions/fetchList';
 import fetchOneTrip from '../../actions/fetchOneTrip';
+import setItemState from '../../actions/setItemState';
 import { useParams } from 'react-router-dom';
 import AddItemForm from '../../components/AddItemForm';
 
@@ -15,10 +16,20 @@ interface ComponentStateProps {
   tripsById: any;
   fetchOneTrip: any;
   items: any;
+  setItemState: any;
 }
 type AppState = ComponentStateProps;
 
-const Items = ({ listsById, getListStatus, fetchList, tripsById, getOneTripStatus, fetchOneTrip, items }: AppState) => {
+const Items = ({
+  listsById,
+  getListStatus,
+  fetchList,
+  tripsById,
+  getOneTripStatus,
+  fetchOneTrip,
+  items,
+  setItemState,
+}: AppState) => {
   const { id }: any = useParams();
   const currentTrip = tripsById[id];
 
@@ -38,18 +49,23 @@ const Items = ({ listsById, getListStatus, fetchList, tripsById, getOneTripStatu
       fetchList(currentTrip.listId);
     }
   });
+
   if (isListLoading) {
     return <p className="mt-32  font-sans text-lg font-bold text-center  ">loading...</p>;
   }
 
   if (isListPresent) {
+    const { itemStates } = listsById[listId];
     return (
       <div>
         <div className="bg-indigo-200 text-center mt-16 text-xl">{listsById[listId].title}</div>
         {listsById && (
           <div className="grid grid-cols-1 ">
             {listsById[currentTrip.listId].itemIds.map((itemId: any) => (
-              <ItemCard key={itemId} item={items[itemId]} />
+              <ItemCard key={itemId} item={items[itemId]} isChecked={itemStates[itemId]} toggleChecked={() => {
+                const state = !itemStates[itemId];
+                setItemState({ listId, itemId, state })
+              }} />
             ))}
             <AddItemForm isListEmpty={listsById[listId].itemIds.length === 0} listId={currentTrip.listId} />
           </div>
@@ -69,4 +85,4 @@ const mapStateToProps = (state: any) => ({
   tripsById: state.trips.byId,
   getOneTripStatus: state.trips.getOneTripStatus,
 });
-export default connect(mapStateToProps, { fetchList, fetchOneTrip })(Items);
+export default connect(mapStateToProps, { fetchList, fetchOneTrip, setItemState })(Items);

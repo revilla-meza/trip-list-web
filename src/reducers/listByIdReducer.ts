@@ -3,6 +3,7 @@ import { FETCH_LIST_SUCCESS, FETCH_LIST_START, FETCH_LIST_ERROR } from '../actio
 import { FETCH_ONE_TRIP_SUCCESS } from '../actions/fetchOneTrip';
 import { CREATE_TRIP_SUCCESS } from '../actions/createTrip';
 import { CREATE_ITEM_SUCCESS } from '../actions/createItem';
+import { SET_ITEM_STATE } from '../actions/setItemState';
 
 export type ListActions =
   | 'FETCH_LIST_SUCCESS'
@@ -71,7 +72,7 @@ const listByIdReducer = (state: ListState = initialState, action: ListAction): L
         byId: { ...state.byId, [action.payload.listId]: { ...state.byId[action.payload.listId], itemIds: newItems } },
         getListStatus: requestStatus.success,
       };
-    case 'SET_ITEM_STATE':
+    case SET_ITEM_STATE:
       return {
         ...state,
         byId: {
@@ -79,7 +80,7 @@ const listByIdReducer = (state: ListState = initialState, action: ListAction): L
           [action.payload.listId]: {
             ...state.byId[action.payload.listId],
             itemStates: {
-              ...state.byId[action.payload.listId.itemStates],
+              ...state.byId[action.payload.listId].itemStates,
               [action.payload.itemId]: action.payload.state
             }
           }

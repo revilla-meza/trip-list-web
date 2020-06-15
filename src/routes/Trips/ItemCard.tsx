@@ -1,17 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import SVGIcon from '../../components/SVGIcon';
 
-const ItemCard = ({ item }: any) => {
-  const [isChecked, toggleChecked] = useState(false);
-  const [textCheck, setTextCheck] = useState('text-gray-800');
+const ItemCard = ({ item, isChecked, toggleChecked }: any) => {
+  const textColor = isChecked ? 'text-gray-500' : 'text-gray-800';
 
   const onClickHandler = () => {
     if (isChecked) {
       toggleChecked(false);
-      setTextCheck('text-gray-800');
     } else {
       toggleChecked(true);
-      setTextCheck('text-gray-500');
     }
   };
   return (
@@ -20,7 +17,7 @@ const ItemCard = ({ item }: any) => {
         {isChecked ? <SVGIcon icon="Checked" /> : <SVGIcon icon="NoCheck" />}
       </div>
       <div className="border-b-2 w-full">
-        <p className={`${textCheck} text-xl`}>{item.label}</p>
+        <p className={`${textColor} text-xl`}>{item.label}</p>
       </div>
     </div>
   );
