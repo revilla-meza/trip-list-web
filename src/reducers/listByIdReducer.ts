@@ -13,7 +13,8 @@ export type ListActions =
   | 'FETCH_ONE_TRIP_ERROR'
   | 'FETCH_ONE_TRIP_START'
   | 'FETCH_ONE_TRIP_SUCCESS'
-  | 'CREATE_ITEM_SUCCESS';
+  | 'CREATE_ITEM_SUCCESS'
+  | 'SET_ITEM_STATE';
 
 export interface ListState {
   byId: any;
@@ -72,6 +73,7 @@ const listByIdReducer = (state: ListState = initialState, action: ListAction): L
       };
     case 'SET_ITEM_STATE':
       return {
+        ...state,
         byId: {
           ...state.byId,
           [action.payload.listId]: {
