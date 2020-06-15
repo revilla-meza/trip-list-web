@@ -1,4 +1,4 @@
-import produce from "immer";
+import produce from 'immer';
 import { requestStatus } from '../types/index';
 import { FETCH_LIST_SUCCESS, FETCH_LIST_START, FETCH_LIST_ERROR } from '../actions/fetchList';
 import { FETCH_ONE_TRIP_SUCCESS } from '../actions/fetchOneTrip';
@@ -33,7 +33,7 @@ const initialState = {
   getListStatus: requestStatus.ready,
 };
 
-const listReducer = produce((draft, action:ListAction) => {
+const listReducer = produce((draft, action: ListAction) => {
   if (!draft) {
     return initialState;
   }
@@ -75,7 +75,7 @@ const listReducer = produce((draft, action:ListAction) => {
       draft.getListStatus = requestStatus.success;
       break;
     case CREATE_ITEM_SUCCESS:
-      draft.byId[action.payload.listId].itemIds.push(action.payload.id); 
+      draft.byId[action.payload.listId].itemIds.push(action.payload.id);
       break;
     case SET_ITEM_STATE:
       draft.byId[action.payload.listId].itemStates[action.payload.itemId] = action.payload.state;
