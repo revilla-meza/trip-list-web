@@ -17,6 +17,7 @@ interface ComponentStateProps {
   fetchOneTrip: any;
   items: any;
   setItemState: any;
+  itemsStateByListId: any;
 }
 type AppState = ComponentStateProps;
 
@@ -29,8 +30,10 @@ const Items = ({
   fetchOneTrip,
   items,
   setItemState,
+  itemsStateByListId
 }: AppState) => {
   const { id }: any = useParams();
+
   const currentTrip = tripsById[id];
 
   const listId = currentTrip && currentTrip.listId;
@@ -42,6 +45,7 @@ const Items = ({
   const isListLoading = getListStatus === 'loading' || getOneTripStatus == 'loading';
 
   const isListPresent = currentTrip && listsById[listId];
+
   useEffect(() => {
     if (!isTripPresentOrOnTheWay) {
       fetchOneTrip(id);
@@ -49,13 +53,17 @@ const Items = ({
       fetchList(currentTrip.listId);
     }
   });
+  useEffect(()=>{
+    const string = JSON.stringify(itemsStateByListId);
+    console.log(string);
+    window.localStorage.setItem('itemsStateByListId', string);
+  }, [itemsStateByListId])
 
   if (isListLoading) {
     return <p className="mt-32  font-sans text-lg font-bold text-center  ">loading...</p>;
   }
 
   if (isListPresent) {
-    const { itemStates } = listsById[listId];
     return (
       <div>
         <div className="bg-indigo-200 text-center mt-16 text-xl">{listsById[listId].title}</div>
@@ -65,9 +73,9 @@ const Items = ({
               <ItemCard
                 key={itemId}
                 item={items[itemId]}
-                isChecked={itemStates[itemId]}
+                isChecked={itemsStateByListId[listId] ? itemsStateByListId[listId][itemId] : false}
                 toggleChecked={() => {
-                  const state = !itemStates[itemId];
+                  const state = itemsStateByListId[listId] ? !itemsStateByListId[listId][itemId] : true;
                   setItemState({ listId, itemId, state });
                 }}
               />
@@ -88,6 +96,7 @@ const mapStateToProps = (state: any) => ({
   items: state.items.byId,
   getListStatus: state.lists.getListStatus,
   tripsById: state.trips.byId,
+  itemsStateByListId: state.itemsState.byListId,
   getOneTripStatus: state.trips.getOneTripStatus,
 });
 export default connect(mapStateToProps, { fetchList, fetchOneTrip, setItemState })(Items);
