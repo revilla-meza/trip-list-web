@@ -47,10 +47,6 @@ const listReducer = produce((draft, action: ListAction) => {
       draft.byId[action.payload.id] = {
         ...action.payload,
         itemIds,
-        itemStates: itemIds.reduce((out: any, it: any) => {
-          out[it] = false;
-          return out;
-        }, {}),
       };
       draft.getListStatus = requestStatus.success;
       break;
@@ -58,7 +54,7 @@ const listReducer = produce((draft, action: ListAction) => {
       draft.getListStatus = requestStatus.error;
       break;
     case CREATE_TRIP_SUCCESS:
-      const listForTrip = { ...action.payload.list, itemIds: [], itemStates: {} };
+      const listForTrip = { ...action.payload.list, itemIds: [] };
       draft.getListStatus = requestStatus.success;
       draft.byId[action.payload.listId] = listForTrip;
       break;
@@ -66,19 +62,12 @@ const listReducer = produce((draft, action: ListAction) => {
       const list = {
         ...action.payload.list,
         itemIds: action.payload.list.items.map((it: { id: any }) => it.id),
-        itemStates: action.payload.list.items.reduce((out: any, it: any) => {
-          out[it.id] = false;
-          return out;
-        }, {}),
       };
       draft.byId[action.payload.listId] = list;
       draft.getListStatus = requestStatus.success;
       break;
     case CREATE_ITEM_SUCCESS:
       draft.byId[action.payload.listId].itemIds.push(action.payload.id);
-      break;
-    case SET_ITEM_STATE:
-      draft.byId[action.payload.listId].itemStates[action.payload.itemId] = action.payload.state;
       break;
   }
 });

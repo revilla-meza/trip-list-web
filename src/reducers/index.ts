@@ -4,6 +4,7 @@ import userReducer from './userReducer';
 import tripsReducer from './tripsReducer';
 import listReducer from './listReducer';
 import itemsByIdReducer from './itemsByIdReducer';
+import itemsStateReducer from './itemsStateReducer';
 
 const reducers = combineReducers({
   user: userReducer,
@@ -11,6 +12,7 @@ const reducers = combineReducers({
   createTrip: createTripReducer,
   lists: listReducer,
   items: itemsByIdReducer,
+  itemsState: itemsStateReducer,
 });
 
 export default reducers;
