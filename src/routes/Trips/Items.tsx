@@ -54,9 +54,8 @@ const Items = ({
     }
   });
   useEffect(() => {
-    const string = JSON.stringify(itemsStateByListId);
-    console.log(string);
-    window.localStorage.setItem('itemsStateByListId', string);
+    const jsonString = JSON.stringify(itemsStateByListId);
+    window.localStorage.setItem('itemsStateByListId', jsonString);
   }, [itemsStateByListId]);
 
   if (isListLoading) {
