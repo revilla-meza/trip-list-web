@@ -12,7 +12,7 @@ const reducers = combineReducers({
   createTrip: createTripReducer,
   lists: listReducer,
   items: itemsByIdReducer,
-  itemsState: itemsStateReducer
+  itemsState: itemsStateReducer,
 });
 
 export default reducers;

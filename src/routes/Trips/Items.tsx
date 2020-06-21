@@ -30,7 +30,7 @@ const Items = ({
   fetchOneTrip,
   items,
   setItemState,
-  itemsStateByListId
+  itemsStateByListId,
 }: AppState) => {
   const { id }: any = useParams();
 
@@ -53,11 +53,11 @@ const Items = ({
       fetchList(currentTrip.listId);
     }
   });
-  useEffect(()=>{
+  useEffect(() => {
     const string = JSON.stringify(itemsStateByListId);
     console.log(string);
     window.localStorage.setItem('itemsStateByListId', string);
-  }, [itemsStateByListId])
+  }, [itemsStateByListId]);
 
   if (isListLoading) {
     return <p className="mt-32  font-sans text-lg font-bold text-center  ">loading...</p>;
