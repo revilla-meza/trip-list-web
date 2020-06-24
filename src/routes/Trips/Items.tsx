@@ -45,7 +45,6 @@ const Items = ({
   const isListLoading = getListStatus === 'loading' || getOneTripStatus == 'loading';
 
   const isListPresent = currentTrip && listsById[listId];
-
   useEffect(() => {
     if (!isTripPresentOrOnTheWay) {
       fetchOneTrip(id);
@@ -57,6 +56,15 @@ const Items = ({
     const jsonString = JSON.stringify(itemsStateByListId);
     window.localStorage.setItem('itemsStateByListId', jsonString);
   }, [itemsStateByListId]);
+
+
+  ///LOGS
+//  console.log('items',items)
+//  console.log('item State by List Id',itemsStateByListId[currentTrip.listId])
+//  console.log('current Trip list Id ',currentTrip)
+
+ /////////
+
 
   if (isListLoading) {
     return <p className="mt-32  font-sans text-lg font-bold text-center  ">loading...</p>;
