@@ -5,7 +5,6 @@ import { FETCH_ONE_TRIP_SUCCESS } from '../actions/fetchOneTrip';
 import { CREATE_TRIP_SUCCESS } from '../actions/createTrip';
 import { CREATE_ITEM_SUCCESS } from '../actions/createItem';
 
-
 export type ListActions =
   | 'FETCH_LIST_SUCCESS'
   | 'FETCH_LIST_START'
