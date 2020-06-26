@@ -45,6 +45,7 @@ const Items = ({
   const isListLoading = getListStatus === 'loading' || getOneTripStatus == 'loading';
 
   const isListPresent = currentTrip && listsById[listId];
+
   useEffect(() => {
     if (!isTripPresentOrOnTheWay) {
       fetchOneTrip(id);
@@ -62,41 +63,45 @@ const Items = ({
   }
 
   if (isListPresent) {
+    const itemsByState = listsById[currentTrip.listId].itemIds.reduce(
+      (output: any, itemId: any) => {
+        if (itemsStateByListId[listId] && itemsStateByListId[listId][itemId]) {
+          output.checked.push(itemId);
+        } else {
+          output.unchecked.push(itemId);
+        }
+        return output;
+      },
+      { checked: [], unchecked: [] },
+    );
     return (
       <div>
         <div className="bg-indigo-200 text-center mt-16 text-xl">{listsById[listId].title}</div>
-        {listsById[currentTrip.listId].itemIds
-          .filter((itemId: any) => {
-            return itemsStateByListId[listId] ? !itemsStateByListId[listId][itemId] : true;
-          })
-          .map((itemId: any) => (
-            <ItemCard
-              key={itemId}
-              item={items[itemId]}
-              isChecked={itemsStateByListId[listId] ? itemsStateByListId[listId][itemId] : false}
-              toggleChecked={() => {
-                const state = itemsStateByListId[listId] ? !itemsStateByListId[listId][itemId] : true;
-                setItemState({ listId, itemId, state });
-              }}
-            />
-          ))}
         {listsById && (
           <div className="grid grid-cols-1 ">
-            {listsById[currentTrip.listId].itemIds
-              .filter((itemId: any) => {
-                return itemsStateByListId[listId] ? itemsStateByListId[listId][itemId] : false;
-              })
-              .map((itemId: any) => (
-                <ItemCard
-                  key={itemId}
-                  item={items[itemId]}
-                  isChecked={itemsStateByListId[listId] ? itemsStateByListId[listId][itemId] : false}
-                  toggleChecked={() => {
-                    const state = itemsStateByListId[listId] ? !itemsStateByListId[listId][itemId] : true;
-                    setItemState({ listId, itemId, state });
-                  }}
-                />
-              ))}
+            {itemsByState.unchecked.map((itemId: any) => (
+              <ItemCard
+                key={itemId}
+                item={items[itemId]}
+                isChecked={itemsStateByListId[listId] ? itemsStateByListId[listId][itemId] : false}
+                toggleChecked={() => {
+                  const state = itemsStateByListId[listId] ? !itemsStateByListId[listId][itemId] : true;
+                  setItemState({ listId, itemId, state });
+                }}
+              />
+            ))}
+            {itemsByState.checked.map((itemId: any) => (
+              <ItemCard
+                key={itemId}
+                item={items[itemId]}
+                isChecked={itemsStateByListId[listId] ? itemsStateByListId[listId][itemId] : false}
+                toggleChecked={() => {
+                  const state = itemsStateByListId[listId] ? !itemsStateByListId[listId][itemId] : true;
+                  setItemState({ listId, itemId, state });
+                }}
+              />
+            ))}
+
             <AddItemForm isListEmpty={listsById[listId].itemIds.length === 0} listId={currentTrip.listId} />
           </div>
         )}
