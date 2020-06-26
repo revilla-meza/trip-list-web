@@ -4,7 +4,7 @@ import { FETCH_LIST_SUCCESS, FETCH_LIST_START, FETCH_LIST_ERROR } from '../actio
 import { FETCH_ONE_TRIP_SUCCESS } from '../actions/fetchOneTrip';
 import { CREATE_TRIP_SUCCESS } from '../actions/createTrip';
 import { CREATE_ITEM_SUCCESS } from '../actions/createItem';
-import { SET_ITEM_STATE } from '../actions/setItemState';
+
 
 export type ListActions =
   | 'FETCH_LIST_SUCCESS'
@@ -15,8 +15,7 @@ export type ListActions =
   | 'FETCH_ONE_TRIP_ERROR'
   | 'FETCH_ONE_TRIP_START'
   | 'FETCH_ONE_TRIP_SUCCESS'
-  | 'CREATE_ITEM_SUCCESS'
-  | 'SET_ITEM_STATE';
+  | 'CREATE_ITEM_SUCCESS';
 
 export interface ListState {
   byId: any;

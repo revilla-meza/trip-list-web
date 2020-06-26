@@ -57,15 +57,6 @@ const Items = ({
     window.localStorage.setItem('itemsStateByListId', jsonString);
   }, [itemsStateByListId]);
 
-
-  ///LOGS
-//  console.log('items',items)
-//  console.log('item State by List Id',itemsStateByListId[currentTrip.listId])
-//  console.log('current Trip list Id ',currentTrip)
-
- /////////
-
-
   if (isListLoading) {
     return <p className="mt-32  font-sans text-lg font-bold text-center  ">loading...</p>;
   }
@@ -74,19 +65,38 @@ const Items = ({
     return (
       <div>
         <div className="bg-indigo-200 text-center mt-16 text-xl">{listsById[listId].title}</div>
+        {listsById[currentTrip.listId].itemIds
+          .filter((itemId: any) => {
+            return itemsStateByListId[listId] ? !itemsStateByListId[listId][itemId] : true;
+          })
+          .map((itemId: any) => (
+            <ItemCard
+              key={itemId}
+              item={items[itemId]}
+              isChecked={itemsStateByListId[listId] ? itemsStateByListId[listId][itemId] : false}
+              toggleChecked={() => {
+                const state = itemsStateByListId[listId] ? !itemsStateByListId[listId][itemId] : true;
+                setItemState({ listId, itemId, state });
+              }}
+            />
+          ))}
         {listsById && (
           <div className="grid grid-cols-1 ">
-            {listsById[currentTrip.listId].itemIds.map((itemId: any) => (
-              <ItemCard
-                key={itemId}
-                item={items[itemId]}
-                isChecked={itemsStateByListId[listId] ? itemsStateByListId[listId][itemId] : false}
-                toggleChecked={() => {
-                  const state = itemsStateByListId[listId] ? !itemsStateByListId[listId][itemId] : true;
-                  setItemState({ listId, itemId, state });
-                }}
-              />
-            ))}
+            {listsById[currentTrip.listId].itemIds
+              .filter((itemId: any) => {
+                return itemsStateByListId[listId] ? itemsStateByListId[listId][itemId] : false;
+              })
+              .map((itemId: any) => (
+                <ItemCard
+                  key={itemId}
+                  item={items[itemId]}
+                  isChecked={itemsStateByListId[listId] ? itemsStateByListId[listId][itemId] : false}
+                  toggleChecked={() => {
+                    const state = itemsStateByListId[listId] ? !itemsStateByListId[listId][itemId] : true;
+                    setItemState({ listId, itemId, state });
+                  }}
+                />
+              ))}
             <AddItemForm isListEmpty={listsById[listId].itemIds.length === 0} listId={currentTrip.listId} />
           </div>
         )}
