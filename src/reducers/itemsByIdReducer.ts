@@ -8,7 +8,8 @@ export type ItemActions =
   | 'CREATE_ITEM_START'
   | 'CREATE_ITEM_ERROR'
   | 'CREATE_ITEM_SUCCESS'
-  | 'FETCH_ONE_TRIP_SUCCESS';
+  | 'FETCH_ONE_TRIP_SUCCESS'
+  | 'SET_ITEM_STATE';
 
 export interface ItemState {
   byId: any;
@@ -25,7 +26,7 @@ const initialState = {
   getItemStatus: requestStatus.ready,
 };
 
-const itemsByIdReducer = (state = initialState, action: ItemAction): ItemState => {
+const itemsByIdReducer = (state: any = initialState, action: ItemAction): ItemState => {
   switch (action.type) {
     case FETCH_LIST_SUCCESS:
       const newItems = action.payload.items.reduce((output: any, el: any) => {
