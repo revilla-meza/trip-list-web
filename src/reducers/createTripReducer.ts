@@ -1,6 +1,6 @@
 import { requestStatus } from '../types/index';
-import { CREATE_TRIP_START, CREATE_TRIP_SUCCESS, CREATE_TRIP_ERROR } from '../actions/createTrip';
-export type createTripActions = 'CREATE_TRIP_START' | 'CREATE_TRIP_SUCCESS' | 'CREATE_TRIP_ERROR';
+import { CREATE_TRIP_START, CREATE_TRIP_SUCCESS, CREATE_TRIP_ERROR, RESET_TRIP_REQUEST_STATUS } from '../actions/createTrip';
+export type createTripActions = 'CREATE_TRIP_START' | 'CREATE_TRIP_SUCCESS' | 'CREATE_TRIP_ERROR' | 'RESET_TRIP_REQUEST_STATUS';
 
 export interface CreateTripState {
   newTrip: any;
@@ -25,6 +25,8 @@ const createTripReducer = (state = initialState, action: createTripAction): Crea
       return { newTrip: action.payload, getCreateTripStatus: requestStatus.success };
     case CREATE_TRIP_ERROR:
       return { ...state, getCreateTripStatus: requestStatus.error };
+    case RESET_TRIP_REQUEST_STATUS:
+      return { ...state, getCreateTripStatus: requestStatus.ready };
     default:
       return state;
   }
