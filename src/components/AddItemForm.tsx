@@ -30,6 +30,7 @@ const AddItemForm = ({ isListEmpty, getItemStatus, createItem, listId }: AppStat
       createItem(newItem);
     }
     textInputRef.current.value = '';
+    setNewItem({ list: listId, label: '' });
   };
 
   return (
