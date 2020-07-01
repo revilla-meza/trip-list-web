@@ -1,6 +1,15 @@
 import { requestStatus } from '../types/index';
-import { CREATE_TRIP_START, CREATE_TRIP_SUCCESS, CREATE_TRIP_ERROR, RESET_TRIP_REQUEST_STATUS } from '../actions/createTrip';
-export type createTripActions = 'CREATE_TRIP_START' | 'CREATE_TRIP_SUCCESS' | 'CREATE_TRIP_ERROR' | 'RESET_TRIP_REQUEST_STATUS';
+import {
+  CREATE_TRIP_START,
+  CREATE_TRIP_SUCCESS,
+  CREATE_TRIP_ERROR,
+  RESET_TRIP_REQUEST_STATUS,
+} from '../actions/createTrip';
+export type createTripActions =
+  | 'CREATE_TRIP_START'
+  | 'CREATE_TRIP_SUCCESS'
+  | 'CREATE_TRIP_ERROR'
+  | 'RESET_TRIP_REQUEST_STATUS';
 
 export interface CreateTripState {
   newTrip: any;
