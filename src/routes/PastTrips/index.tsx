@@ -3,7 +3,6 @@ import PastTripsCard from './PastTripsCard';
 import NavBar from '../../components/NavBar';
 import { connect } from 'react-redux';
 import fetchTrips from '../../actions/fetchTrips';
-
 import { Link } from 'react-router-dom';
 
 interface ComponentStateProps {
@@ -18,7 +17,7 @@ const PastTripsList = ({ tripIds, tripsById, fetchTrips, status }: AppState) => 
   useEffect(() => {
     const doInBackground = tripIds.length > 0;
     fetchTrips(doInBackground);
-  }, [fetchTrips]);
+  }, [fetchTrips, tripIds.length]);
 
   if (status === 'loading') {
     return <p className="mt-32  font-sans text-lg font-bold text-center  ">loading...</p>;
