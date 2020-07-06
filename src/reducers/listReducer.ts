@@ -70,9 +70,9 @@ const listReducer = produce((draft, action: ListAction) => {
       draft.byId[action.payload.listId].itemIds.push(action.payload.id);
       break;
     case DELETE_ITEM_SUCCESS:
-        const newItemIds = action.payload.itemIds.filter((el: any) => el !== action.payload.itemId);
-        draft.byId[action.payload.listId].itemIds = newItemIds;
-        break;
+      const newItemIds = action.payload.itemIds.filter((el: any) => el !== action.payload.itemId);
+      draft.byId[action.payload.listId].itemIds = newItemIds;
+      break;
   }
 });
 

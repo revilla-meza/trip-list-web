@@ -69,11 +69,11 @@ const tripsReducer = (state = initialState, action: TripsAction): TripsState => 
     case FETCH_ONE_TRIP_ERROR:
       return { ...state, getOneTripStatus: requestStatus.error };
     case DELETE_TRIP_SUCCESS:
-        const newTripsId = state.ids.filter((id) => id !== action.payload);
-        return {
-          ...state,
-          ids: newTripsId,
-        };
+      const newTripsId = state.ids.filter((id) => id !== action.payload);
+      return {
+        ...state,
+        ids: newTripsId,
+      };
     default:
       return state;
   }
