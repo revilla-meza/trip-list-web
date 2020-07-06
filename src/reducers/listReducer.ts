@@ -4,6 +4,7 @@ import { FETCH_LIST_SUCCESS, FETCH_LIST_START, FETCH_LIST_ERROR } from '../actio
 import { FETCH_ONE_TRIP_SUCCESS } from '../actions/fetchOneTrip';
 import { CREATE_TRIP_SUCCESS } from '../actions/createTrip';
 import { CREATE_ITEM_SUCCESS } from '../actions/createItem';
+import { DELETE_ITEM_SUCCESS } from '../actions/deleteItem';
 
 export type ListActions =
   | 'FETCH_LIST_SUCCESS'
@@ -14,6 +15,7 @@ export type ListActions =
   | 'FETCH_ONE_TRIP_ERROR'
   | 'FETCH_ONE_TRIP_START'
   | 'FETCH_ONE_TRIP_SUCCESS'
+  | 'DELETE_ITEM_SUCCESS'
   | 'CREATE_ITEM_SUCCESS';
 
 export interface ListState {
@@ -67,6 +69,10 @@ const listReducer = produce((draft, action: ListAction) => {
     case CREATE_ITEM_SUCCESS:
       draft.byId[action.payload.listId].itemIds.push(action.payload.id);
       break;
+    case DELETE_ITEM_SUCCESS:
+        const newItemIds = action.payload.itemIds.filter((el: any) => el !== action.payload.itemId);
+        draft.byId[action.payload.listId].itemIds = newItemIds;
+        break;
   }
 });
 
