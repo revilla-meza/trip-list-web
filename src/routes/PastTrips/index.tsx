@@ -3,7 +3,6 @@ import PastTripsCard from './PastTripsCard';
 import NavBar from '../../components/NavBar';
 import { connect } from 'react-redux';
 import fetchTrips from '../../actions/fetchTrips';
-import { Link } from 'react-router-dom';
 import deleteTrip from '../../actions/deleteTrip';
 
 interface ComponentStateProps {
