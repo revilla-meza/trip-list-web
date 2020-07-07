@@ -7,6 +7,7 @@ import fetchOneTrip from '../../actions/fetchOneTrip';
 import setItemState from '../../actions/setItemState';
 import { useParams } from 'react-router-dom';
 import AddItemForm from '../../components/AddItemForm';
+import deleteItem from '../../actions/deleteItem';
 
 interface ComponentStateProps {
   listsById: any;
@@ -18,6 +19,7 @@ interface ComponentStateProps {
   items: any;
   setItemState: any;
   itemsStateByListId: any;
+  deleteItem: any;
 }
 type AppState = ComponentStateProps;
 
@@ -31,6 +33,7 @@ const Items = ({
   items,
   setItemState,
   itemsStateByListId,
+  deleteItem,
 }: AppState) => {
   const { id }: any = useParams();
 
@@ -83,6 +86,9 @@ const Items = ({
               <ItemCard
                 key={itemId}
                 item={items[itemId]}
+                deleteItem={deleteItem}
+                itemIds={listsById[currentTrip.listId].itemIds}
+                listId={currentTrip.listId}
                 isChecked={itemsStateByListId[listId] ? itemsStateByListId[listId][itemId] : false}
                 toggleChecked={() => {
                   const state = itemsStateByListId[listId] ? !itemsStateByListId[listId][itemId] : true;
@@ -94,6 +100,9 @@ const Items = ({
               <ItemCard
                 key={itemId}
                 item={items[itemId]}
+                deleteItem={deleteItem}
+                itemIds={listsById[currentTrip.listId].itemIds}
+                listId={currentTrip.listId}
                 isChecked={itemsStateByListId[listId] ? itemsStateByListId[listId][itemId] : false}
                 toggleChecked={() => {
                   const state = itemsStateByListId[listId] ? !itemsStateByListId[listId][itemId] : true;
@@ -121,4 +130,4 @@ const mapStateToProps = (state: any) => ({
   itemsStateByListId: state.itemsState.byListId,
   getOneTripStatus: state.trips.getOneTripStatus,
 });
-export default connect(mapStateToProps, { fetchList, fetchOneTrip, setItemState })(Items);
+export default connect(mapStateToProps, { fetchList, fetchOneTrip, setItemState, deleteItem })(Items);

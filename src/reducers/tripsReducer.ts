@@ -1,7 +1,7 @@
 import { requestStatus } from '../types/index';
 import { FETCH_TRIPS_START, FETCH_TRIPS_SUCCESS, FETCH_TRIPS_ERROR } from '../actions/fetchTrips';
 import { FETCH_ONE_TRIP_START, FETCH_ONE_TRIP_SUCCESS, FETCH_ONE_TRIP_ERROR } from '../actions/fetchOneTrip';
-
+import { DELETE_TRIP_SUCCESS } from '../actions/deleteTrip';
 import { CREATE_TRIP_SUCCESS } from '../actions/createTrip';
 export type tripsActions =
   | 'FETCH_TRIPS_START'
@@ -10,6 +10,7 @@ export type tripsActions =
   | 'CREATE_TRIP_SUCCESS'
   | 'FETCH_ONE_TRIP_ERROR'
   | 'FETCH_ONE_TRIP_START'
+  | 'DELETE_TRIP_SUCCESS'
   | 'FETCH_ONE_TRIP_SUCCESS';
 
 export interface TripsState {
@@ -67,6 +68,12 @@ const tripsReducer = (state = initialState, action: TripsAction): TripsState => 
       };
     case FETCH_ONE_TRIP_ERROR:
       return { ...state, getOneTripStatus: requestStatus.error };
+    case DELETE_TRIP_SUCCESS:
+      const newTripsId = state.ids.filter((id) => id !== action.payload);
+      return {
+        ...state,
+        ids: newTripsId,
+      };
     default:
       return state;
   }

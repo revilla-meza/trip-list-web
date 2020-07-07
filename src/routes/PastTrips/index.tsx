@@ -3,17 +3,18 @@ import PastTripsCard from './PastTripsCard';
 import NavBar from '../../components/NavBar';
 import { connect } from 'react-redux';
 import fetchTrips from '../../actions/fetchTrips';
-import { Link } from 'react-router-dom';
+import deleteTrip from '../../actions/deleteTrip';
 
 interface ComponentStateProps {
   tripIds: any;
   fetchTrips: any;
   tripsById: any;
   status: any;
+  deleteTrip: any;
 }
 type AppState = ComponentStateProps;
 
-const PastTripsList = ({ tripIds, tripsById, fetchTrips, status }: AppState) => {
+const PastTripsList = ({ tripIds, tripsById, fetchTrips, status, deleteTrip }: AppState) => {
   useEffect(() => {
     const doInBackground = tripIds.length > 0;
     fetchTrips(doInBackground);
@@ -34,10 +35,8 @@ const PastTripsList = ({ tripIds, tripsById, fetchTrips, status }: AppState) => 
             Please add a new Trip
           </h1>
         )}
-        {tripIds.map((id: any) => (
-          <Link to={`/trip/${id}`} key={id}>
-            <PastTripsCard key={id} trips={tripsById[id]} />
-          </Link>
+        {tripIds.map((id: any, key: any) => (
+          <PastTripsCard key={id} deleteTrip={deleteTrip} trips={tripsById[id]} />
         ))}
       </div>
       <NavBar />
@@ -51,4 +50,4 @@ const mapStateToProps = (state: any) => ({
   status: state.trips.getTripsStatus,
 });
 
-export default connect(mapStateToProps, { fetchTrips })(PastTripsList);
+export default connect(mapStateToProps, { fetchTrips, deleteTrip })(PastTripsList);
