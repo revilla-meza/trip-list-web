@@ -14,7 +14,6 @@ const PastTripsCard = ({ trips, deleteTrip }: any) => {
       <div className="px-6 my-2 ">
         <div className="flex flex-col bg-indigo-200 rounded p-1 shadow-lg">
           <Link className="flex flex-col" to={`/trip/${trips.id}`}>
-            {' '}
             <p className="text-black font-semibold font-sans tracking-wide">{trips.destination}</p>
             <p className="text-gray-700 italic text-xs">{trips.title}</p>
             <p className="text-gray-600 italic text-xs self-end">{trips.travel_method}</p>
