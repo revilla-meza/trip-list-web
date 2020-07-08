@@ -20,7 +20,7 @@ const ItemCard = ({ item, isChecked, toggleChecked, deleteItem, itemIds, listId 
 
   const onLongPress = () => deleteItem(item.id, listId, itemIds);
 
-  const longPressEvent = useLongPress(onLongPress, onClickHandler, defaultOptionsForLongPress)
+  const longPressEvent = useLongPress(onLongPress, onClickHandler, defaultOptionsForLongPress);
 
   return (
     <div className="p-3 m-2 flex flex-row items-center rounded shadow-md" {...longPressEvent}>
