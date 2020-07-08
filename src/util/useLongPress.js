@@ -12,7 +12,6 @@ import { useCallback, useRef, useState } from 'react';
   If nit wasn't, it will clear the timeout and let the event be a normal click event unless the mouse leaves the element before. 
 */
 
-
 const isTouchEvent = (event) => {
   return 'touches' in event;
 };
