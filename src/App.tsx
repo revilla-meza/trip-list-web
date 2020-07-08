@@ -15,6 +15,11 @@ interface ComponentStateProps {
 type AppState = ComponentStateProps;
 
 function App({ user }: AppState) {
+  React.useEffect(()=>{
+    // prevent "right click" menu from popping up when long pressing an element
+    window.oncontextmenu = function() { return false; }
+  }, []);
+
   React.useEffect(() => {
     const { email, userId } = user;
 
