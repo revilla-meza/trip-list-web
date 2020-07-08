@@ -23,11 +23,11 @@ const ItemCard = ({ item, isChecked, toggleChecked, deleteItem, itemIds, listId 
   const longPressEvent = useLongPress(onLongPress, null, defaultOptionsForLongPress);
 
   return (
-    <div className="p-3 m-2 flex flex-row items-center rounded shadow-md" {...longPressEvent}>
+    <div className="p-3 m-2 flex flex-row items-center rounded justify-between shadow-md" {...longPressEvent}>
+      <p className={`${textColor} text-xl`}>{item.label}</p>
       <div onClick={toggleState} className="mr-3">
         {isChecked ? <SVGIcon icon="Checked" /> : <SVGIcon icon="NoCheck" />}
       </div>
-      <p className={`${textColor} text-xl`}>{item.label}</p>
     </div>
   );
 };
