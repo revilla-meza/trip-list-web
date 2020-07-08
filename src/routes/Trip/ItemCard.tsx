@@ -1,4 +1,5 @@
 import React from 'react';
+import useLongPress from '../../util/useLongPress';
 import SVGIcon from '../../components/SVGIcon';
 
 const ItemCard = ({ item, isChecked, toggleChecked, deleteItem, itemIds, listId }: any) => {
@@ -12,17 +13,19 @@ const ItemCard = ({ item, isChecked, toggleChecked, deleteItem, itemIds, listId 
     }
   };
 
+  const defaultOptionsForLongPress = {
+    shouldPreventDefault: true,
+    delay: 1000, // delete item after one second pressing.
+  };
+
+  const onLongPress = () => deleteItem(item.id, listId, itemIds);
+
+  const longPressEvent = useLongPress(onLongPress, onClickHandler, defaultOptionsForLongPress)
+
   return (
-    <div className="flex items-center h-8">
-      <div onClick={onClickHandler} className="w-8 ml-2">
-        {isChecked ? <SVGIcon icon="Checked" /> : <SVGIcon icon="NoCheck" />}
-      </div>
-      <div className="border-b-2 w-full">
-        <p className={`${textColor} text-xl`}>{item.label}</p>
-      </div>
-      <button className="self-end text-center text-gray-600 p-1" onClick={() => deleteItem(item.id, listId, itemIds)}>
-        -
-      </button>
+    <div className="p-3 m-2 flex flex-row items-center rounded shadow-md" {...longPressEvent}>
+      <div className="mr-3">{isChecked ? <SVGIcon icon="Checked" /> : <SVGIcon icon="NoCheck" />}</div>
+      <p className={`${textColor} text-xl`}>{item.label}</p>
     </div>
   );
 };
