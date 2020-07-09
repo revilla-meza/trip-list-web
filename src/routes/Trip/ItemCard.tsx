@@ -28,7 +28,7 @@ const ItemCard = ({ item, isChecked, toggleChecked, deleteItem, itemIds, listId 
   const longPressEvent = useLongPress(onLongPress, null, defaultOptionsForLongPress);
   if (itemBeingDeleted) {
     return (
-      <div className="p-3 m-2 bg-red-200 flex flex-row items-center rounded justify-between shadow-md">
+      <div className="p-3 m-2 bg-red-200 flex flex-row items-center rounded justify-between shadow-sm">
         <p className=" text-gray-800 text-xl">Delete Item?</p>
         <div className="flex  mr-3">
           <button className=" text-green-800 mx-2" onClick={onDeleteItem}>
@@ -43,7 +43,7 @@ const ItemCard = ({ item, isChecked, toggleChecked, deleteItem, itemIds, listId 
     );
   }
   return (
-    <div className="p-3 m-2 flex flex-row items-center rounded justify-between shadow-md" {...longPressEvent}>
+    <div className="p-3 m-2 flex flex-row items-center rounded justify-between shadow-sm" {...longPressEvent}>
       <p className={`${textColor} text-xl`}>{item.label}</p>
       <div onClick={toggleState} className="mr-3">
         {isChecked ? <SVGIcon icon="Checked" /> : <SVGIcon icon="NoCheck" />}
