@@ -31,7 +31,9 @@ const ItemCard = ({ item, isChecked, toggleChecked, deleteItem, itemIds, listId 
       <div className="p-3 m-2 bg-red-200 flex flex-row items-center rounded justify-between shadow-md">
         <p className=" text-gray-800 text-xl">Delete Item?</p>
         <div className="flex  mr-3">
+          // eslint-disable-next-line prettier/prettier
           <button className=" text-green-800 mx-2" onClick={onDeleteItem}>Yes</button>
+          // eslint-disable-next-line prettier/prettier
           <button className=" text-red-800 mx-2" onClick={() => setItemBeingDeleted(!itemBeingDeleted)}>No</button>
         </div>
       </div>
