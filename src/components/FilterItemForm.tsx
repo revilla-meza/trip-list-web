@@ -8,15 +8,16 @@ interface ComponentStateProps {
 type AppState = ComponentStateProps;
 
 const FilterItemForm = ({ queryHandler }: AppState) => {
-  const textInputRef: any = React.useRef(null);
-
   const onchangeHandler = (e: any) => {
     queryHandler(e.target.value);
+  };
+  const submitHandler = (e: any) => {
+    e.preventDefault();
   };
 
   return (
     <div>
-      <form className="flex items-center h-8">
+      <form onSubmit={submitHandler} className="flex items-center h-8">
         <div className="border-b-2 w-full text-xl">
           <DebounceInput
             minLength={1}
@@ -26,7 +27,6 @@ const FilterItemForm = ({ queryHandler }: AppState) => {
             type="text"
             placeholder="    search item"
             onChange={onchangeHandler}
-            ref={textInputRef}
           ></DebounceInput>
         </div>
       </form>
