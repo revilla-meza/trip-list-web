@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import NavBar from '../../components/NavBar';
 import ItemCard from './ItemCard';
 import { connect } from 'react-redux';
@@ -8,6 +8,7 @@ import setItemState from '../../actions/setItemState';
 import { useParams } from 'react-router-dom';
 import AddItemForm from '../../components/AddItemForm';
 import deleteItem from '../../actions/deleteItem';
+import FilterItemForm from '../../components/FilterItemForm';
 
 interface ComponentStateProps {
   listsById: any;
@@ -35,6 +36,7 @@ const Items = ({
   itemsStateByListId,
   deleteItem,
 }: AppState) => {
+  const [itemQuery, setItemQuery] = useState('');
   const { id }: any = useParams();
 
   const currentTrip = tripsById[id];
@@ -49,6 +51,15 @@ const Items = ({
 
   const isListPresent = currentTrip && listsById[listId];
 
+  let listOfItemIds = [];
+
+  const queryHandler = (value: any) => {
+    //Value from the FilterItemForm
+
+    setItemQuery(value);
+  };
+
+  const itemFilterIds: any[] = [];
   useEffect(() => {
     if (!isTripPresentOrOnTheWay) {
       fetchOneTrip(id);
@@ -64,9 +75,21 @@ const Items = ({
   if (isListLoading) {
     return <p className="mt-32  font-sans text-lg font-bold text-center  ">loading...</p>;
   }
-
   if (isListPresent) {
-    const itemsByState = listsById[currentTrip.listId].itemIds.reduce(
+    //ITEM FILTER
+    if (itemQuery === '') {
+      //Check if form field has any value
+      listOfItemIds = listsById[currentTrip.listId].itemIds;
+    } else {
+      const itemFilter = listsById[currentTrip.listId].items.filter((item: any) =>
+        item.label.toLowerCase().includes(itemQuery.toLowerCase()),
+      );
+      itemFilter.forEach((item: any) => {
+        return itemFilterIds.push(item.id);
+      });
+      listOfItemIds = itemFilterIds; //New List of items product of filtering
+    }
+    const itemsByState = listOfItemIds.reduce(
       (output: any, itemId: any) => {
         if (itemsStateByListId[listId] && itemsStateByListId[listId][itemId]) {
           output.checked.push(itemId);
@@ -77,9 +100,14 @@ const Items = ({
       },
       { checked: [], unchecked: [] },
     );
+
     return (
       <div>
         <div className="bg-indigo-200 text-center mt-16 text-xl">{listsById[listId].title}</div>
+        <FilterItemForm queryHandler={queryHandler} />
+        {itemQuery !== '' && listOfItemIds.length === 0 && (
+          <p className=" text-gray-600 text-center">No item was found</p>
+        )}
         {listsById && (
           <div className="grid grid-cols-1 ">
             {itemsByState.unchecked.map((itemId: any) => (

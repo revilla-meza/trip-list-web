@@ -49,6 +49,7 @@ const itemsByIdReducer = (state: any = initialState, action: ItemAction): ItemSt
         return output;
       }, {});
       return { byId: { ...state.byId, ...items }, getItemStatus: requestStatus.success };
+
     default:
       return state;
   }

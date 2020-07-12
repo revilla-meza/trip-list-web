@@ -12,7 +12,7 @@ const PastTripsCard = ({ trips, deleteTrip }: any) => {
   if (!isBeingDeleted) {
     return (
       <div className="px-6 my-2 ">
-        <div className="flex flex-col bg-indigo-200 rounded p-1 shadow-lg">
+        <div className="flex flex-col bg-indigo-200 rounded p-1 shadow-md">
           <Link className="flex flex-col" to={`/trip/${trips.id}`}>
             <p className="text-black font-semibold font-sans tracking-wide">{trips.destination}</p>
             <p className="text-gray-700 italic text-xs">{trips.title}</p>
@@ -29,7 +29,7 @@ const PastTripsCard = ({ trips, deleteTrip }: any) => {
   return (
     <div>
       <div className="px-6 my-2">
-        <div className="flex flex-col bg-indigo-100 rounded p-1 shadow-lg">
+        <div className="flex flex-col bg-indigo-100 rounded p-1 shadow-md">
           <p className="text-black font-semibold font-sans tracking-wide">Delete?</p>
           <button className="bg-green-500 w-8 mb-2 rounded" onClick={(): any => deleteTrip(trips.id)}>
             Yes
