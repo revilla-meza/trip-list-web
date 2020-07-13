@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import NavBar from '../../components/NavBar';
 import ItemCard from './ItemCard';
 import { connect } from 'react-redux';
@@ -8,6 +8,7 @@ import setItemState from '../../actions/setItemState';
 import { useParams } from 'react-router-dom';
 import AddItemForm from '../../components/AddItemForm';
 import deleteItem from '../../actions/deleteItem';
+import FilterItemForm from '../../components/FilterItemForm';
 
 interface ComponentStateProps {
   listsById: any;
@@ -35,6 +36,7 @@ const Items = ({
   itemsStateByListId,
   deleteItem,
 }: AppState) => {
+  const [itemQuery, setItemQuery] = useState('');
   const { id }: any = useParams();
 
   const currentTrip = tripsById[id];
@@ -48,6 +50,12 @@ const Items = ({
   const isListLoading = getListStatus === 'loading' || getOneTripStatus == 'loading';
 
   const isListPresent = currentTrip && listsById[listId];
+
+  const queryHandler = (value: any) => {
+    //Value from the FilterItemForm
+
+    setItemQuery(value);
+  };
 
   useEffect(() => {
     if (!isTripPresentOrOnTheWay) {
@@ -66,7 +74,18 @@ const Items = ({
   }
 
   if (isListPresent) {
-    const itemsByState = listsById[currentTrip.listId].itemIds.reduce(
+    //ITEM FILTER
+    const listOfItemIds = listsById[currentTrip.listId].itemIds;
+    let filteredItemIds: any[] = [];
+    if (itemQuery === '') {
+      //Check if form field has any value
+      filteredItemIds = listOfItemIds;
+    } else {
+      filteredItemIds = listOfItemIds.filter((itemId: any) => {
+        return items[itemId].label.toLowerCase().includes(itemQuery.toLocaleLowerCase());
+      });
+    }
+    const itemsByState = filteredItemIds.reduce(
       (output: any, itemId: any) => {
         if (itemsStateByListId[listId] && itemsStateByListId[listId][itemId]) {
           output.checked.push(itemId);
@@ -77,9 +96,14 @@ const Items = ({
       },
       { checked: [], unchecked: [] },
     );
+
     return (
       <div>
         <div className="bg-indigo-200 text-center mt-16 text-xl">{listsById[listId].title}</div>
+        <FilterItemForm queryHandler={queryHandler} />
+        {itemQuery !== '' && filteredItemIds.length === 0 && (
+          <p className=" text-gray-600 text-center">No item was found</p>
+        )}
         {listsById && (
           <div className="grid grid-cols-1 ">
             {itemsByState.unchecked.map((itemId: any) => (
