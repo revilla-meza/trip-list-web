@@ -51,8 +51,6 @@ const Items = ({
 
   const isListPresent = currentTrip && listsById[listId];
 
-  let listOfItemIds = [];
-
   const queryHandler = (value: any) => {
     //Value from the FilterItemForm
 
@@ -77,7 +75,7 @@ const Items = ({
 
   if (isListPresent) {
     //ITEM FILTER
-    listOfItemIds = listsById[currentTrip.listId].itemIds;
+    const listOfItemIds = listsById[currentTrip.listId].itemIds;
     let filteredItemIds: any[] = [];
     if (itemQuery === '') {
       //Check if form field has any value
