@@ -59,7 +59,6 @@ const Items = ({
     setItemQuery(value);
   };
 
-  const itemFilterIds: any[] = [];
   useEffect(() => {
     if (!isTripPresentOrOnTheWay) {
       fetchOneTrip(id);
@@ -75,21 +74,20 @@ const Items = ({
   if (isListLoading) {
     return <p className="mt-32  font-sans text-lg font-bold text-center  ">loading...</p>;
   }
+
   if (isListPresent) {
     //ITEM FILTER
+    listOfItemIds = listsById[currentTrip.listId].itemIds;
+    let filteredItemIds: any[] = [];
     if (itemQuery === '') {
       //Check if form field has any value
-      listOfItemIds = listsById[currentTrip.listId].itemIds;
+      filteredItemIds = listOfItemIds;
     } else {
-      const itemFilter = listsById[currentTrip.listId].items.filter((item: any) =>
-        item.label.toLowerCase().includes(itemQuery.toLowerCase()),
-      );
-      itemFilter.forEach((item: any) => {
-        return itemFilterIds.push(item.id);
+      filteredItemIds = listOfItemIds.filter((itemId: any) => {
+        return items[itemId].label.toLowerCase().includes(itemQuery.toLocaleLowerCase());
       });
-      listOfItemIds = itemFilterIds; //New List of items product of filtering
     }
-    const itemsByState = listOfItemIds.reduce(
+    const itemsByState = filteredItemIds.reduce(
       (output: any, itemId: any) => {
         if (itemsStateByListId[listId] && itemsStateByListId[listId][itemId]) {
           output.checked.push(itemId);
@@ -105,7 +103,7 @@ const Items = ({
       <div>
         <div className="bg-indigo-200 text-center mt-16 text-xl">{listsById[listId].title}</div>
         <FilterItemForm queryHandler={queryHandler} />
-        {itemQuery !== '' && listOfItemIds.length === 0 && (
+        {itemQuery !== '' && filteredItemIds.length === 0 && (
           <p className=" text-gray-600 text-center">No item was found</p>
         )}
         {listsById && (
