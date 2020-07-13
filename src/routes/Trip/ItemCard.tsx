@@ -37,7 +37,7 @@ const ItemCard = ({ item, isChecked, toggleChecked, deleteItem, itemIds, listId 
   return (
     <div className="p-3 m-2 flex flex-row items-center rounded justify-between shadow-sm">
       <div className="flex flex-row items-center justify-between ">
-        <div style={{marginLeft:"-10px"}} onClick={toDelete}>
+        <div style={{ marginLeft: '-10px' }} onClick={toDelete}>
           <SVGIcon icon="deleteIcon" />
         </div>
         <p className={`${textColor} text-xl ml-5`}>{item.label}</p>
