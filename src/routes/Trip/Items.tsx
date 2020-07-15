@@ -6,7 +6,6 @@ import fetchList from '../../actions/fetchList';
 import fetchOneTrip from '../../actions/fetchOneTrip';
 import setItemState from '../../actions/setItemState';
 import { useParams } from 'react-router-dom';
-import AddItemForm from '../../components/AddItemForm';
 import deleteItem from '../../actions/deleteItem';
 import FilterItemForm from '../../components/FilterItemForm';
 
@@ -53,7 +52,6 @@ const Items = ({
 
   const queryHandler = (value: any) => {
     //Value from the FilterItemForm
-
     setItemQuery(value);
   };
 
@@ -64,6 +62,7 @@ const Items = ({
       fetchList(currentTrip.listId);
     }
   });
+
   useEffect(() => {
     const jsonString = JSON.stringify(itemsStateByListId);
     window.localStorage.setItem('itemsStateByListId', jsonString);
@@ -74,17 +73,32 @@ const Items = ({
   }
 
   if (isListPresent) {
-    //ITEM FILTER
     const listOfItemIds = listsById[currentTrip.listId].itemIds;
     let filteredItemIds: any[] = [];
+    let isItemQueryNew;
+
     if (itemQuery === '') {
-      //Check if form field has any value
       filteredItemIds = listOfItemIds;
     } else {
-      filteredItemIds = listOfItemIds.filter((itemId: any) => {
-        return items[itemId].label.toLowerCase().includes(itemQuery.toLocaleLowerCase());
-      });
+      const filtered = listOfItemIds.reduce(
+        (out: any, id: any) => {
+          const itemLabel = items[id].label.toLowerCase().trim();
+          const query = itemQuery.toLocaleLowerCase();
+          if (itemLabel.includes(query)) {
+            out.itemIds.push(id);
+          }
+          if (query === itemLabel) {
+            out.newLabel = false;
+          }
+          return out;
+        },
+        { itemIds: [], newLabel: true },
+      );
+
+      filteredItemIds = filtered.itemIds;
+      isItemQueryNew = filtered.newLabel;
     }
+
     const itemsByState = filteredItemIds.reduce(
       (output: any, itemId: any) => {
         if (itemsStateByListId[listId] && itemsStateByListId[listId][itemId]) {
@@ -96,14 +110,17 @@ const Items = ({
       },
       { checked: [], unchecked: [] },
     );
-
+    const zeroMatches = filteredItemIds.length === 0;
     return (
       <div>
-        <div className="bg-indigo-200 text-center mt-16 text-xl">{listsById[listId].title}</div>
-        <FilterItemForm queryHandler={queryHandler} />
-        {itemQuery !== '' && filteredItemIds.length === 0 && (
-          <p className=" text-gray-600 text-center">No item was found</p>
-        )}
+        <FilterItemForm
+          listId={listId}
+          zeroItems={listOfItemIds.length === 0}
+          queryHandler={queryHandler}
+          newLabel={isItemQueryNew}
+        />
+        <div className="bg-indigo-200 text-center text-xl">{listsById[listId].title}</div>
+        {itemQuery !== '' && zeroMatches && <p className=" text-gray-600 text-center">No item was found</p>}
         {listsById && (
           <div className="grid grid-cols-1 ">
             {itemsByState.unchecked.map((itemId: any) => (
@@ -134,8 +151,6 @@ const Items = ({
                 }}
               />
             ))}
-
-            <AddItemForm isListEmpty={listsById[listId].itemIds.length === 0} listId={currentTrip.listId} />
           </div>
         )}
         <NavBar />
