@@ -25,6 +25,8 @@ const FilterItemForm = ({ queryHandler, newLabel, zeroItems, createItem, listId 
   const submitHandler = (e: any) => {
     e.preventDefault();
     if (newLabel) createItem({ list: listId, label: newItemLabel });
+    setNewItemLabel(''); // clear input
+    queryHandler(''); // clear filter
   };
 
   return (
@@ -35,6 +37,7 @@ const FilterItemForm = ({ queryHandler, newLabel, zeroItems, createItem, listId 
           debounceTimeout={500}
           className="p-2 w-3/4"
           name="newItem"
+          value={newItemLabel}
           type="text"
           placeholder={zeroItems ? 'New item' : 'Search item'}
           onChange={onchangeHandler}
