@@ -39,7 +39,7 @@ const FilterItemForm = ({ queryHandler, newLabel, zeroItems, createItem, listId 
           name="newItem"
           value={newItemLabel}
           type="text"
-          placeholder={zeroItems ? 'New item' : 'Search item'}
+          placeholder={zeroItems ? 'Add item' : 'Search or add item'}
           onChange={onchangeHandler}
         ></DebounceInput>
         {/*If label is new or list has zero items, we prompt users to add a new item
